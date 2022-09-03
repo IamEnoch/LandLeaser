@@ -45,6 +45,7 @@ namespace LandLeaser.API.Controllers
             {
                 FirstName = registerVm.FirstName,
                 LastName = registerVm.LastName,
+                UserName = registerVm.FirstName + "" + registerVm.LastName,
                 Email = registerVm.EmailAddress,
                 PhoneNumber = registerVm.PhoneNumeber,
                 SecurityStamp = Guid.NewGuid().ToString()
@@ -57,7 +58,7 @@ namespace LandLeaser.API.Controllers
             {
                 return Ok("User created");
             }
-            return BadRequest("User not created");
+            return BadRequest(result.Errors);
         }
 
     }
