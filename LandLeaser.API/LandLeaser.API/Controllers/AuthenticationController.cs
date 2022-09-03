@@ -76,7 +76,7 @@ namespace LandLeaser.API.Controllers
             //Check if the user exists in the database
             var userExists = await _userManager.FindByEmailAsync(loginVM.EmailAddress);
 
-            if(userExists is not null && await _userManager.CheckPasswordAsync(userExists, loginVM.Password))
+            if (userExists is not null && await _userManager.CheckPasswordAsync(userExists, loginVM.Password))
             {
                 return Ok("Login successful");
             }
