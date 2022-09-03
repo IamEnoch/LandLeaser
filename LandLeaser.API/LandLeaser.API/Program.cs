@@ -1,4 +1,6 @@
 using LandLeaser.API.Data;
+using LandLeaser.API.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,10 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
     //Configure DbContext with sql
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders();
 
 
 builder.Services.AddControllers();
