@@ -22,5 +22,10 @@ namespace LandLeaser.API.Controllers
             _roleManager = roleManager;
             _configuration = configuration;
         }
+
+        [HttpPost("register-user")]
+        //check model state
+        //Check if the user exists
+        //
     }
 }
