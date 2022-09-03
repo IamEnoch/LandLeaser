@@ -4,6 +4,10 @@ using LandLeaser.API.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace LandLeaser.API.Controllers
 {
@@ -78,9 +82,50 @@ namespace LandLeaser.API.Controllers
 
             if (userExists is not null && await _userManager.CheckPasswordAsync(userExists, loginVM.Password))
             {
-                return Ok("Login successful");
+                //Generate a token
+                var tokenValue = await GenerateJWTTokenAsync(userExists);
+
+                return Ok(tokenValue);
             }
             return Unauthorized();
         }
+
+        private async Task<AuthResultVM> GenerateJWTTokenAsync(ApplicationUser user)
+        {
+            //Authentication claims = Claim(Stores info about a subject)
+            var authClaims = new List<Claim>()
+            {
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+
+            };
+
+            //Authentication signing key
+            var authSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["JWT:Secret"]));
+
+            //Create a token
+            var token = new JwtSecurityToken(
+                issuer: _configuration["JWT:Issuer"],
+                audience: _configuration["JWT:Audience"],
+                expires: DateTime.UtcNow.AddMinutes(1),
+                claims: authClaims,
+                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256));
+
+            //Create jwt token
+            var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
+
+            var response = new AuthResultVM()
+            {
+                Token = jwtToken,
+                ExpiresAt = token.ValidTo
+            };
+
+            return response;
+
+        }
+        
     }    
 }
