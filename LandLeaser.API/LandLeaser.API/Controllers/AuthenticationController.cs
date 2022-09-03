@@ -65,10 +65,7 @@ namespace LandLeaser.API.Controllers
             return BadRequest(result.Errors);
         }
 
-        [HttpPost("login-user")]
-        
-        
-        //ok if user exists and password password is correct else return unauthorized
+        [HttpPost("login-user")]    
         public async Task<IActionResult> Login([FromBody] LoginVM loginVM)
         {
             //Check if the modelstate is valid
@@ -80,6 +77,7 @@ namespace LandLeaser.API.Controllers
             //Check if the user exists in the database
             var userExists = await _userManager.FindByEmailAsync(loginVM.EmailAddress);
 
+            //ok if user exists and password password is correct else return unauthorized
             if (userExists is not null && await _userManager.CheckPasswordAsync(userExists, loginVM.Password))
             {
                 //Generate a token
