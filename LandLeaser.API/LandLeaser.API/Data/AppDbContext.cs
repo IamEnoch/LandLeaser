@@ -11,5 +11,6 @@ namespace LandLeaser.API.Data
         {
 
         }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
     }
 }
