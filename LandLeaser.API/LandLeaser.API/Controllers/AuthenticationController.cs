@@ -21,13 +21,19 @@ namespace LandLeaser.API.Controllers
         private readonly AppDbContext _context;
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly IConfiguration _configuration;
+        private readonly TokenValidationParameters _tokenValidationParameters;
 
-        public AuthenticationController(UserManager<ApplicationUser> userManager, AppDbContext context, RoleManager<ApplicationRole> roleManager, IConfiguration configuration)
+        public AuthenticationController(UserManager<ApplicationUser> userManager,
+            AppDbContext context,
+            RoleManager<ApplicationRole> roleManager,
+            IConfiguration configuration,
+            TokenValidationParameters tokenValidationParameters)
         {
             _userManager = userManager;
             _context = context;
             _roleManager = roleManager;
             _configuration = configuration;
+            _tokenValidationParameters = tokenValidationParameters;
         }
 
         [HttpPost("register-user")]
@@ -83,7 +89,7 @@ namespace LandLeaser.API.Controllers
             if (userExists is not null && await _userManager.CheckPasswordAsync(userExists, loginVM.Password))
             {
                 //Generate a token
-                var tokenValue = await GenerateJWTTokenAsync(userExists);
+                var tokenValue = await GenerateJWTTokenAsync(userExists, null);
 
                 return Ok(tokenValue);
             }
@@ -95,6 +101,8 @@ namespace LandLeaser.API.Controllers
         /// </summary>
         /// <param name="TokenRequstVM"></param>
         /// <returns></returns>
+        /// 
+        [HttpPost("refresh-user")]
         public async Task<IActionResult> RefreshToken([FromBody] TokenRequestVM tokenRequestVM)
         {
             //Check if the model state is valid
@@ -106,32 +114,45 @@ namespace LandLeaser.API.Controllers
             //Refresh the access token
             var result = await VerifyAndGenerateTokenAsync(tokenRequestVM);
 
+            return Ok(result);
+
         }
 
         private async Task<AuthResultVM> VerifyAndGenerateTokenAsync(TokenRequestVM tokenRequestVM)
         {
             //Create an instance of the token handler
-            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtTokenHandler = new JwtSecurityTokenHandler();
 
             //Retirving the refresh token details
-            var storedToken = await _context.RefreshTokens.FirstOrDefaultAsync(x => x.Token == tokenRequestVM.Token);
+            var storedToken = await _context.RefreshTokens.FirstOrDefaultAsync(x => x.Token == tokenRequestVM.RefreshToken);
 
             //Geting the user associated with the refresh token
             var dbUser = await _userManager.FindByIdAsync(storedToken.UserId.ToString());
 
             try
             {
+                //Validted the access token
+                var tokenCheckResult = jwtTokenHandler.ValidateToken(tokenRequestVM.Token, _tokenValidationParameters,
+                    out var validatedToken);
 
+                return await GenerateJWTTokenAsync(dbUser, storedToken);
 
             }
-            catch (Exception)
+            catch (SecurityTokenExpiredException)
             {
-
-                throw;
+                //Check if the security token is expired
+                if (storedToken.DateExpire >= DateTime.UtcNow) 
+                {
+                    return await GenerateJWTTokenAsync(dbUser, storedToken);
+                }
+                else
+                {
+                    return await GenerateJWTTokenAsync(dbUser, null);
+                }
             }
         }
 
-        private async Task<AuthResultVM> GenerateJWTTokenAsync(ApplicationUser user)
+        private async Task<AuthResultVM> GenerateJWTTokenAsync(ApplicationUser user, RefreshToken rToken)
         {
             //Authentication claims = Claim(Stores info about a subject)
             var authClaims = new List<Claim>()
@@ -157,6 +178,18 @@ namespace LandLeaser.API.Controllers
 
             //Create jwt token
             var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
+
+            if(rToken is not null)
+            {
+                var refreshTokenRresponse = new AuthResultVM()
+                {
+                    Token = jwtToken,
+                    RefreshToken = rToken.Token,
+                    ExpiresAt = token.ValidTo
+                };
+
+                return refreshTokenRresponse;
+            }
 
             //Create a refresh token
             var refreshToken = new RefreshToken()
