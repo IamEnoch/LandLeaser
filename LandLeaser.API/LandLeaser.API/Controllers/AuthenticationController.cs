@@ -4,6 +4,8 @@ using LandLeaser.API.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -86,6 +88,47 @@ namespace LandLeaser.API.Controllers
                 return Ok(tokenValue);
             }
             return Unauthorized();
+        }
+
+        /// <summary>
+        /// Refresh token controller
+        /// </summary>
+        /// <param name="TokenRequstVM"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> RefreshToken([FromBody] TokenRequestVM tokenRequestVM)
+        {
+            //Check if the model state is valid
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Enter all the required fields");
+            }
+
+            //Refresh the access token
+            var result = await VerifyAndGenerateTokenAsync(tokenRequestVM);
+
+        }
+
+        private async Task<AuthResultVM> VerifyAndGenerateTokenAsync(TokenRequestVM tokenRequestVM)
+        {
+            //Create an instance of the token handler
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            //Retirving the refresh token details
+            var storedToken = await _context.RefreshTokens.FirstOrDefaultAsync(x => x.Token == tokenRequestVM.Token);
+
+            //Geting the user associated with the refresh token
+            var dbUser = await _userManager.FindByIdAsync(storedToken.UserId.ToString());
+
+            try
+            {
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         private async Task<AuthResultVM> GenerateJWTTokenAsync(ApplicationUser user)
