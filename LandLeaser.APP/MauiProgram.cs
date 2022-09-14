@@ -1,4 +1,7 @@
-﻿namespace LandLeaser.APP
+﻿using LandLeaser.APP.ViewModels;
+using LandLeaserApp.Views;
+
+namespace LandLeaser.APP
 {
     public static class MauiProgram
     {
@@ -14,6 +17,12 @@
                     fonts.AddFont("TitilliumWeb-Regular.ttf", "TitilliumWebRegular");
                     fonts.AddFont("TitilliumWeb-SemiBold.ttf", "TitilliumWebSemibold");
                 });
+            //Services
+            //Views
+            builder.Services.AddSingleton<SignUpPage>();
+
+            //ViewModel
+            builder.Services.AddSingleton<SignUpViewModel>();
 
             return builder.Build();
         }
