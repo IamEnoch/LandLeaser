@@ -26,10 +26,11 @@
     <Style TargetType="Button">
         <Setter Property="TextColor" Value="{StaticResource White}" />
         <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="HeightRequest" Value="48"/>
         <Setter Property="FontFamily" Value="TitilliumWebRegular"/>
         <Setter Property="FontAttributes" Value="Bold"/>
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="CornerRadius" Value="12"/>
         <Setter Property="Padding" Value="14,10"/>
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>

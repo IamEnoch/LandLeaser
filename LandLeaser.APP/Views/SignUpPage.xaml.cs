@@ -1,12 +1,10 @@
-using LandLeaser.APP.ViewModels;
-
-namespace LandLeaserApp.Views;
+namespace LandLeaser.APP.Views;
 
 public partial class SignUpPage : ContentPage
 {
-	public SignUpPage(SignUpViewModel signUpViewModel)
+	public SignUpPage()
 	{
 		InitializeComponent();
-		BindingContext = signUpViewModel;
+		
 	}
 }

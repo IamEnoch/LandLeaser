@@ -1,5 +1,6 @@
 ﻿using LandLeaser.APP.ViewModels;
-using LandLeaserApp.Views;
+using LandLeaser.APP.Views;
+using LandLeaserApp.ViewModels;
 
 namespace LandLeaser.APP
 {
@@ -23,6 +24,7 @@ namespace LandLeaser.APP
 
             //ViewModel
             builder.Services.AddSingleton<SignUpViewModel>();
+            builder.Services.AddSingleton<AppShellViewModel>();
 
             return builder.Build();
         }

@@ -5,7 +5,9 @@ VisualStudioVersion = 17.4.32804.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LandLeaser.APP", "LandLeaser.APP\LandLeaser.APP.csproj", "{E229E615-E709-4E44-9210-47810CF4A5AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LandLeaser.API", "LandLeaser.API\LandLeaser.API\LandLeaser.API.csproj", "{C94978DE-1DF1-4E0C-81E9-B50C5AEB365A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LandLeaser.API", "LandLeaser.API\LandLeaser.API\LandLeaser.API.csproj", "{C94978DE-1DF1-4E0C-81E9-B50C5AEB365A}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "LandLeaser.Shared", "LandLeaser.Shared\LandLeaser.Shared.shproj", "{D2C54324-24D5-4A14-BD68-2EF8522281F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,5 +31,10 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FD7D0142-DFC9-478E-BEA4-60EA39DE2B2A}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		LandLeaser.Shared\LandLeaser.Shared.projitems*{c94978de-1df1-4e0c-81e9-b50c5aeb365a}*SharedItemsImports = 5
+		LandLeaser.Shared\LandLeaser.Shared.projitems*{d2c54324-24d5-4a14-bd68-2ef8522281f6}*SharedItemsImports = 13
+		LandLeaser.Shared\LandLeaser.Shared.projitems*{e229e615-e709-4e44-9210-47810cf4a5ad}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

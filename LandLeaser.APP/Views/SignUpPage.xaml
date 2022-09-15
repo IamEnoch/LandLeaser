@@ -1,12 +1,84 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LandLeaserApp.Views.SignUpPage"
-             Title="SignUpPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:Class="LandLeaser.APP.Views.SignUpPage"
+             Title="SignUpPage"
+             Shell.NavBarIsVisible="False">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="35"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="35"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="24"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <VerticalStackLayout Grid.Column="1"
+                             Grid.Row="1">
+            <Image
+            Source="Resources\AppIcon\appicon.svg"/>
+            
+            <Label
+                Text="Register"
+                Style="{StaticResource TitleLarge}"
+                TextColor="{StaticResource PrimaryColor}"/>
+
+            <Entry
+                Placeholder="First Name"
+                Style="{StaticResource EntryLL}"
+                Margin="0,30,0,0"/>
+            
+            <Entry
+                Placeholder="Last Name"
+                Style="{StaticResource EntryLL}"
+                Margin="0,35,0,0"/>
+            
+            <Entry
+                Placeholder="Email Address"
+                Style="{StaticResource EntryLL}"
+                Margin="0,35,0,0"/>
+
+            <HorizontalStackLayout
+                Margin="0,35,0,0">
+                <Entry
+                    Placeholder="Code"
+                    Style="{StaticResource EntryLL}"
+                    Margin="0,0,68.5,0"/>
+
+                <Entry
+                    Placeholder="Phone Number"
+                    Style="{StaticResource EntryLL}"/>
+            </HorizontalStackLayout>
+
+            <Entry
+                Placeholder="Password"
+                Style="{StaticResource EntryLL}"
+                IsPassword="True"
+                Margin="0,35,0,0"/>
+
+            <Button
+                Text="Sign Up"
+                Margin="0,50,0,0"/>
+
+            <HorizontalStackLayout 
+                HorizontalOptions="Center"
+                Margin="0,18,0,0">
+                <Label Text="Already have an account? "                   
+                   Style="{StaticResource LabelLarge}"/>
+
+                <ContentView >
+                    <!--<ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding DisplaySignUpPageCommand}"/>
+                </ContentView.GestureRecognizers>-->
+                    <Label Text="Login"
+                       Style="{StaticResource BodyLarge}"
+                       TextColor="{StaticResource PrimaryColor}"/>
+                </ContentView>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
+    
+
 </ContentPage>

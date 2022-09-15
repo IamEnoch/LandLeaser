@@ -107,6 +107,14 @@
                 <Setter Property="TextColor" Value="Black"/>
             </Style>
 
+            <!---Land Leaser Entry-->
+            <Style x:Key="EntryLL" TargetType="Entry">
+                <Setter Property="PlaceholderColor" Value="Black"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontFamily" Value="TitilliumWebRegular"/>
+                <Setter Property="PlaceholderColor" Value="Black"/>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

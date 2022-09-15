@@ -10,6 +10,8 @@
     <Color x:Key="PrimaryLightColor2">#E1E7E2</Color>
     <Color x:Key="SecondaryColor">#006666</Color>
     <Color x:Key="SecondaryColorDark">#003B3C</Color>
+    <Color x:Key="Primary">#512BD4</Color>
+    <Color x:Key="Secondary">#DFD8F7</Color>
     <Color x:Key="Tertiary">#2B0B98</Color>
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>

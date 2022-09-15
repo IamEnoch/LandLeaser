@@ -71,4 +71,6 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+	<Import Project="..\LandLeaser.Shared\LandLeaser.Shared.projitems" Label="Shared" />
+
 </Project>
