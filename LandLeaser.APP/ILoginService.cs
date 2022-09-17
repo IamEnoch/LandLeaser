@@ -9,6 +9,6 @@ namespace LandLeaserApp
 {
     public interface ILoginService
     {
-        public async Task<LoginResult> Authenticate(LoginRequest loginRequest);
+        public Task<LoginResult> Authenticate(LoginRequest loginRequest);
     }
 }
