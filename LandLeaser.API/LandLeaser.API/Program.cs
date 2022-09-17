@@ -58,14 +58,14 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "Art Promotion API",
+        Title = "Land Leaser API",
         Version = "v1",
         Description = "",
         Contact = new OpenApiContact
         {
             Email = "enoch.mwangi@outlook.com",
             Name = "Enoch Mwangi",
-            Url = new Uri("https://artpromotion.azurewebsites.net/swagger/index.html")
+            Url = new Uri("https://landleaserapi.azurewebsites.net/swagger/index.html")
         }
     });
     /*options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
