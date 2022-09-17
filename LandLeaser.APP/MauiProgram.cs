@@ -1,6 +1,9 @@
 ﻿using LandLeaser.APP.ViewModels;
 using LandLeaser.APP.Views;
+using LandLeaserApp;
+using LandLeaserApp.Services;
 using LandLeaserApp.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace LandLeaser.APP
 {
@@ -19,6 +22,8 @@ namespace LandLeaser.APP
                     fonts.AddFont("TitilliumWeb-SemiBold.ttf", "TitilliumWebSemibold");
                 });
             //Services
+            builder.Services.AddSingleton<ILoginService, LoginService>();
+
             //Views
             builder.Services.AddSingleton<SignUpPage>();
 

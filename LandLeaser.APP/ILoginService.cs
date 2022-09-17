@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LandLeaser.API.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace LandLeaserApp
 {
     public interface ILoginService
     {
-        public async Task<LoginResponse> Authenticate(LoginRequestDTO loginRequestDTO)
+        public async Task<LoginResult> Authenticate(LoginRequest loginRequest);
     }
 }
