@@ -36,8 +36,8 @@ namespace LandLeaser.API.Controllers
             _tokenValidationParameters = tokenValidationParameters;
         }
 
-        [HttpPost("register-user")]
-        public async Task<IActionResult> Register([FromBody]RegisterVM registerVm)
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody]Register register)
         {
             //check model state
             if (!ModelState.IsValid)
@@ -46,7 +46,7 @@ namespace LandLeaser.API.Controllers
             }
 
             //Check if the user exists
-            var userExists = await _userManager.FindByEmailAsync(registerVm.EmailAddress);
+            var userExists = await _userManager.FindByEmailAsync(register.EmailAddress);
             if(userExists is not null)
             {
                 return BadRequest("User already exists");
@@ -55,15 +55,15 @@ namespace LandLeaser.API.Controllers
             //Create application user
             ApplicationUser applicationUser = new()
             {
-                FirstName = registerVm.FirstName,
-                LastName = registerVm.LastName,
-                UserName = registerVm.FirstName + "" + registerVm.LastName,
-                Email = registerVm.EmailAddress,
-                PhoneNumber = registerVm.PhoneNumeber,
+                FirstName = register.FirstName,
+                LastName = register.LastName,
+                UserName = register.FirstName + "" + register.LastName,
+                Email = register.EmailAddress,
+                PhoneNumber = register.PhoneNumeber,
                 SecurityStamp = Guid.NewGuid().ToString()
             };
 
-            var result = await _userManager.CreateAsync(applicationUser, registerVm.Password);
+            var result = await _userManager.CreateAsync(applicationUser, register.Password);
 
             //if user created = ok elser bad request
             if (result.Succeeded)
@@ -73,8 +73,8 @@ namespace LandLeaser.API.Controllers
             return BadRequest(result.Errors);
         }
 
-        [HttpPost("login-user")]    
-        public async Task<IActionResult> Login([FromBody] LoginVM loginVM)
+        [HttpPost("login")]    
+        public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
             //Check if the modelstate is valid
             if (!ModelState.IsValid)
@@ -83,10 +83,10 @@ namespace LandLeaser.API.Controllers
             }
 
             //Check if the user exists in the database
-            var userExists = await _userManager.FindByEmailAsync(loginVM.EmailAddress);
+            var userExists = await _userManager.FindByEmailAsync(loginRequest.EmailAddress);
 
             //ok if user exists and password password is correct else return unauthorized
-            if (userExists is not null && await _userManager.CheckPasswordAsync(userExists, loginVM.Password))
+            if (userExists is not null && await _userManager.CheckPasswordAsync(userExists, loginRequest.Password))
             {
                 //Generate a token
                 var tokenValue = await GenerateJWTTokenAsync(userExists, null);
@@ -102,8 +102,8 @@ namespace LandLeaser.API.Controllers
         /// <param name="TokenRequstVM"></param>
         /// <returns></returns>
         /// 
-        [HttpPost("refresh-user")]
-        public async Task<IActionResult> RefreshToken([FromBody] TokenRequestVM tokenRequestVM)
+        [HttpPost("refreshToken")]
+        public async Task<IActionResult> RefreshToken([FromBody] TokenRequest tokenRequest)
         {
             //Check if the model state is valid
             if (!ModelState.IsValid)
@@ -112,19 +112,19 @@ namespace LandLeaser.API.Controllers
             }
 
             //Refresh the access token
-            var result = await VerifyAndGenerateTokenAsync(tokenRequestVM);
+            var result = await VerifyAndGenerateTokenAsync(tokenRequest);
 
             return Ok(result);
 
         }
 
-        private async Task<AuthResultVM> VerifyAndGenerateTokenAsync(TokenRequestVM tokenRequestVM)
+        private async Task<LoginResult> VerifyAndGenerateTokenAsync(TokenRequest tokenRequest)
         {
             //Create an instance of the token handler
             var jwtTokenHandler = new JwtSecurityTokenHandler();
 
             //Retirving the refresh token details
-            var storedToken = await _context.RefreshTokens.FirstOrDefaultAsync(x => x.Token == tokenRequestVM.RefreshToken);
+            var storedToken = await _context.RefreshTokens.FirstOrDefaultAsync(x => x.Token == tokenRequest.RefreshToken);
 
             //Geting the user associated with the refresh token
             var dbUser = await _userManager.FindByIdAsync(storedToken.UserId.ToString());
@@ -132,7 +132,7 @@ namespace LandLeaser.API.Controllers
             try
             {
                 //Validted the access token
-                var tokenCheckResult = jwtTokenHandler.ValidateToken(tokenRequestVM.Token, _tokenValidationParameters,
+                var tokenCheckResult = jwtTokenHandler.ValidateToken(tokenRequest.Token, _tokenValidationParameters,
                     out var validatedToken);
 
                 return await GenerateJWTTokenAsync(dbUser, storedToken);
@@ -152,7 +152,7 @@ namespace LandLeaser.API.Controllers
             }
         }
 
-        private async Task<AuthResultVM> GenerateJWTTokenAsync(ApplicationUser user, RefreshToken rToken)
+        private async Task<LoginResult> GenerateJWTTokenAsync(ApplicationUser user, RefreshToken rToken)
         {
             //Authentication claims = Claim(Stores info about a subject)
             var authClaims = new List<Claim>()
@@ -181,7 +181,7 @@ namespace LandLeaser.API.Controllers
 
             if(rToken is not null)
             {
-                var refreshTokenRresponse = new AuthResultVM()
+                var refreshTokenRresponse = new LoginResult()
                 {
                     Token = jwtToken,
                     RefreshToken = rToken.Token,
@@ -205,7 +205,7 @@ namespace LandLeaser.API.Controllers
             await _context.RefreshTokens.AddAsync(refreshToken);
             await _context.SaveChangesAsync();
 
-            var response = new AuthResultVM()
+            var response = new LoginResult()
             {
                 Token = jwtToken,
                 RefreshToken = refreshToken.Token,
