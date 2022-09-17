@@ -2,11 +2,11 @@
 
 namespace LandLeaser.API.ViewModel
 {
-    public class TokenRequestVM
+    public class LoginRequest
     {
         [Required]
-        public string Token { get; set; }
+        public string EmailAddress { get; set; }
         [Required]
-        public string RefreshToken { get; set; }
+        public string Password { get; set; }
     }
 }

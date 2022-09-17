@@ -9,9 +9,9 @@
     <Import_RootNamespace>LandLeaser.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Models\AuthResultVM.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\LoginVM.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\RegisterVM.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\TokenRequestVM.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LoginResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LoginRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Register.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\TokenRequest.cs" />
   </ItemGroup>
 </Project>

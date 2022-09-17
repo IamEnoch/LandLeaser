@@ -1,6 +1,6 @@
 ﻿namespace LandLeaser.API.ViewModel
 {
-    public class AuthResultVM
+    public class LoginResult
     {
         public string Token { get; set; }
         public string RefreshToken { get; set; }

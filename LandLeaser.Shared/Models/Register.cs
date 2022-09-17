@@ -2,7 +2,7 @@
 
 namespace LandLeaser.API.ViewModel
 {
-    public class RegisterVM
+    public class Register
     {
         [Required]
         public string FirstName { get; set; }
