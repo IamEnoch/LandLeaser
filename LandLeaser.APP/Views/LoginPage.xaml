@@ -18,7 +18,7 @@
         <VerticalStackLayout Grid.Column="1"
                              Grid.Row="1">
             <Image
-                Source="Resources/AppIcon/applogowt.svg"/>
+                Source="Resources/AppIcon/applogowt.png"/>
 
             <Label
                 Text="Login"
@@ -43,7 +43,8 @@
 
             <Button
                 Text="Login"
-                Margin="0,50,0,0"/>
+                Margin="0,50,0,0"
+                Command="{Binding DisplaySignUpPageCommand}"/>
 
             <HorizontalStackLayout 
                 HorizontalOptions="Center"
@@ -52,9 +53,9 @@
                    Style="{StaticResource LabelLarge}"/>
 
                 <ContentView >
-                    <!--<ContentView.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding DisplaySignUpPageCommand}"/>
-                </ContentView.GestureRecognizers>-->
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding DisplaySignUpPageCommand}"/>
+                    </ContentView.GestureRecognizers>
                     <Label Text="Register"
                        Style="{StaticResource BodyLarge}"
                        TextColor="{StaticResource PrimaryColor}"/>

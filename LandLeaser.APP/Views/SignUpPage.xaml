@@ -60,6 +60,7 @@
 
             <Button
                 Text="Sign Up"
+                Command="{Binding DisplayLoginPageCommand}"
                 Margin="0,50,0,0"/>
 
             <HorizontalStackLayout 
@@ -69,9 +70,9 @@
                    Style="{StaticResource LabelLarge}"/>
 
                 <ContentView >
-                    <!--<ContentView.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding DisplaySignUpPageCommand}"/>
-                </ContentView.GestureRecognizers>-->
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding DisplayLoginPageCommand}"/>
+                    </ContentView.GestureRecognizers>
                     <Label Text="Login"
                        Style="{StaticResource BodyLarge}"
                        TextColor="{StaticResource PrimaryColor}"/>
