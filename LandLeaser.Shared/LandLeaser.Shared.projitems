@@ -13,5 +13,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\LoginRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Register.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\TokenRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\UserBasicInfo.cs" />
   </ItemGroup>
 </Project>
