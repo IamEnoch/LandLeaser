@@ -27,6 +27,7 @@ namespace LandLeaser.APP
             //Views
             builder.Services.AddSingleton<SignUpPage>();
             builder.Services.AddSingleton<LoginPage>();
+            builder.Services.AddSingleton<PushPage>();
 
             //ViewModel
             builder.Services.AddSingleton<SignUpViewModel>();
