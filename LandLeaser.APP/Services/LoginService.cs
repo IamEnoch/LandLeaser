@@ -12,7 +12,7 @@ namespace LandLeaserApp.Services
 {
     public class LoginService : ILoginService
     {
-        HttpClient Client;
+        HttpClient Client = new HttpClient();
         public async Task<LoginResult> Authenticate(LoginRequest loginRequest)
         {
             //login url
@@ -29,9 +29,13 @@ namespace LandLeaserApp.Services
 
             if (response.IsSuccessStatusCode)
             {
-                return await response.Content.ReadFromJsonAsync<LoginResult>();
+                var loginResult = await response.Content.ReadFromJsonAsync<LoginResult>();
+                return loginResult;
             }
-            return null;
+            else
+            {
+                return null;
+            }
 
         }
     }

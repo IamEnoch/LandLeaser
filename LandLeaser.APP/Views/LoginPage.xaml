@@ -28,13 +28,15 @@
             <Entry
                 Placeholder="Email Address"
                 Style="{StaticResource EntryLL}"
-                Margin="0,30,0,0"/>
+                Margin="0,30,0,0"
+                Text="{Binding Email}"/>
 
             <Entry
                 Placeholder="Password"
                 IsPassword="True"
                 Style="{StaticResource EntryLL}"
-                Margin="0,35,0,0"/>
+                Margin="0,35,0,0"
+                Text="{Binding Password}"/>
 
             <Label Text="Forgot password?"
                    HorizontalOptions="End"
@@ -44,7 +46,7 @@
             <Button
                 Text="Login"
                 Margin="0,50,0,0"
-                Command="{Binding DisplaySignUpPageCommand}"/>
+                Command="{Binding LoginCommand}"/>
 
             <HorizontalStackLayout 
                 HorizontalOptions="Center"

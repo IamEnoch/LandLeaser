@@ -1,6 +1,6 @@
 ﻿using LandLeaser.APP.ViewModels;
 using LandLeaser.APP.Views;
-using LandLeaserApp;
+using LandLeaserApp.Interfaces;
 using LandLeaserApp.Services;
 using LandLeaserApp.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +30,7 @@ namespace LandLeaser.APP
 
             //ViewModel
             builder.Services.AddSingleton<SignUpViewModel>();
+            builder.Services.AddSingleton<LoginViewModel>();
             builder.Services.AddSingleton<AppShellViewModel>();
 
             return builder.Build();
