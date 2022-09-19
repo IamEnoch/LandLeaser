@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Android.OS;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LandLeaser.API.ViewModel;
 using LandLeaser.APP;
@@ -24,11 +25,13 @@ namespace LandLeaserApp.ViewModels
 
         //Dependency injection of the login service
         private readonly ILoginService _loginService;
+        private readonly UserManager _userManager;
 
-        public LoginViewModel(ILoginService loginService)
+        public LoginViewModel(ILoginService loginService, UserManager userManager)
         {
             Title = nameof(LoginPage);
             _loginService = loginService;
+            _userManager = userManager;
         }
 
         [RelayCommand]
@@ -56,6 +59,15 @@ namespace LandLeaserApp.ViewModels
                 {
                     
                     await AppShell.Current.DisplayAlert("Login", "Login was Successfull!!!", "Ok");
+
+                    //Set the neceessary credentials
+                    //Remove existing preference details
+                    if (Preferences.ContainsKey(nameof(App.UserInfo)))
+                    {
+                        Preferences.Remove(nameof(App.UserInfo));
+                    }
+
+                    //Desired infromation to be stored
                 }
                 else
                 {
