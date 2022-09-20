@@ -1,6 +1,7 @@
 ﻿using LandLeaser.API.Data;
 using LandLeaser.API.Data.Models;
 using LandLeaser.API.ViewModel;
+using LandLeaserApp.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -90,6 +91,7 @@ namespace LandLeaser.API.Controllers
             {
                 //Generate a token
                 var tokenValue = await GenerateJWTTokenAsync(userExists, null);
+
 
                 return Ok(tokenValue);
             }
