@@ -4,6 +4,8 @@ using LandLeaserApp.Interfaces;
 using LandLeaserApp.Services;
 using LandLeaserApp.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
+using UraniumUI;
+using CommunityToolkit.Maui;
 
 namespace LandLeaser.APP
 {
@@ -12,15 +14,17 @@ namespace LandLeaser.APP
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
-            builder
-                .UseMauiApp<App>()
-                .ConfigureFonts(fonts =>
-                {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                    fonts.AddFont("TitilliumWeb-Regular.ttf", "TitilliumWebRegular");
-                    fonts.AddFont("TitilliumWeb-SemiBold.ttf", "TitilliumWebSemibold");
-                });
+            builder.UseMauiApp<App>().ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                fonts.AddFont("TitilliumWeb-Regular.ttf", "TitilliumWebRegular");
+                fonts.AddFont("TitilliumWeb-SemiBold.ttf", "TitilliumWebSemibold");
+            }).ConfigureMauiHandlers(handlers =>
+            {
+                handlers.AddUraniumUIHandlers(); // 👈 This line should be added.
+            }).UseMauiCommunityToolkit();
+
             //Services
             builder.Services.AddSingleton<ILoginService, LoginService>();
             builder.Services.AddSingleton<IUserService, UserService>();

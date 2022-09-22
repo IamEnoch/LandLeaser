@@ -2,12 +2,20 @@
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:LandLeaser.APP"
+             xmlns:material="clr-namespace:UraniumUI.Material.Resources;assembly=UraniumUI.Material"
              x:Class="LandLeaser.APP.App">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                
+                <!--Material colour resourec-->
+                <material:ColorResource />
+                
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+
+                <!--Material style resourec-->
+                <material:StyleResource />
             </ResourceDictionary.MergedDictionaries>
 
             <!--Fontstyles-->

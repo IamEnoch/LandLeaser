@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LandLeaser.APP.Views.LoginPage"
+             xmlns:material="clr-namespace:UraniumUI.Material.Controls;assembly=UraniumUI.Material"
              Shell.NavBarIsVisible="False"
              Title="LoginPage">
     <Grid>
@@ -30,6 +31,12 @@
                 Style="{StaticResource EntryLL}"
                 Margin="0,30,0,0"
                 Text="{Binding Email}"/>
+
+            <material:TextField
+                CascadeInputTransparent="True"
+                Title="Test"
+                TitleColor="{StaticResource PrimaryColor}"
+                />
 
             <Entry
                 Placeholder="Password"
