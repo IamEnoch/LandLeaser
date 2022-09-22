@@ -1,11 +1,11 @@
-﻿using Android.OS;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LandLeaser.API.ViewModel;
 using LandLeaser.APP;
 using LandLeaser.APP.ViewModels;
 using LandLeaser.APP.Views;
 using LandLeaserApp.Interfaces;
+using LandLeaserApp.Models;
 using LandLeaserApp.Services;
 using System;
 using System.Collections.Generic;
@@ -25,13 +25,13 @@ namespace LandLeaserApp.ViewModels
 
         //Dependency injection of the login service
         private readonly ILoginService _loginService;
-        private readonly UserManager _userManager;
+        private readonly IUserService _userService;
 
-        public LoginViewModel(ILoginService loginService, UserManager userManager)
+        public LoginViewModel(ILoginService loginService, IUserService userService )
         {
             Title = nameof(LoginPage);
             _loginService = loginService;
-            _userManager = userManager;
+            _userService = userService;
         }
 
         [RelayCommand]
@@ -41,7 +41,7 @@ namespace LandLeaserApp.ViewModels
         }
 
         [RelayCommand]
-        async void Login()
+        async Task Login()
         {
             //Check whether string is null or empty for both fields
             if(!String.IsNullOrEmpty(_email) && !String.IsNullOrEmpty(_password))
@@ -56,10 +56,7 @@ namespace LandLeaserApp.ViewModels
                 var response = await _loginService.Authenticate(loginCredentials);
 
                 if(response != null)
-                {
-                    
-                    await AppShell.Current.DisplayAlert("Login", "Login was Successfull!!!", "Ok");
-
+                {                   
                     //Set the neceessary credentials
                     //Remove existing preference details
                     if (Preferences.ContainsKey(nameof(App.UserInfo)))
@@ -68,16 +65,30 @@ namespace LandLeaserApp.ViewModels
                     }
 
                     //Desired infromation to be stored
+
+                    var userDetails = await _userService.GetUser(Email, response.Token);
+                    var userInfo = new UserBasicInfo()
+                    {
+                        FullName = userDetails.FullName,
+                        Email = userDetails.Email,
+                        PhoneNumber = userDetails.PhoneNumber
+                    };
+
+                    //Add user preferences
+                    await AppShell.Current.DisplayAlert("Login", "Login was Successfull!!!", "Ok");
+
                 }
                 else
                 {
                     await AppShell.Current.DisplayAlert("Login", "Login was unsuccessfull!!!", "Ok");
                 }
+                
             }
             else
             {
                 await AppShell.Current.DisplayAlert("Error", "Enter all fields", "Ok");
             }
+            
         }
     }
 }

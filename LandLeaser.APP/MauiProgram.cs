@@ -23,6 +23,7 @@ namespace LandLeaser.APP
                 });
             //Services
             builder.Services.AddSingleton<ILoginService, LoginService>();
+            builder.Services.AddSingleton<IUserService, UserService>();
 
             //Views
             builder.Services.AddSingleton<SignUpPage>();

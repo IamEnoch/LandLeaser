@@ -9,6 +9,6 @@ namespace LandLeaserApp.Interfaces
 {
     public interface IUserService
     {
-        public Task<UserBasicInfo> GetUser(string email);
+        public Task<UserBasicInfo> GetUser(string email, string accessToken);
     }
 }
