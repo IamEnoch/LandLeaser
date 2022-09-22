@@ -7,6 +7,7 @@ using LandLeaser.APP.Views;
 using LandLeaserApp.Interfaces;
 using LandLeaserApp.Models;
 using LandLeaserApp.Services;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,16 +66,13 @@ namespace LandLeaserApp.ViewModels
                     }
 
                     //Desired infromation to be stored
-
                     var userDetails = await _userService.GetUser(Email, response.Token);
-                    var userInfo = new UserBasicInfo()
-                    {
-                        FullName = userDetails.FullName,
-                        Email = userDetails.Email,
-                        PhoneNumber = userDetails.PhoneNumber
-                    };
+                    var userInfoStr = JsonConvert.SerializeObject(userDetails);
 
-                    //Add user preferences
+                    //Add user preferences and securely store token
+                    Preferences.Set(nameof(App.UserInfo), userInfoStr);
+                    await SecureStorage.SetAsync(nameof(App.Token), response.Token);
+
                     await AppShell.Current.DisplayAlert("Login", "Login was Successfull!!!", "Ok");
 
                 }
