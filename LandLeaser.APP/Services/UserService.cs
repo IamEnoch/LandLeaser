@@ -18,6 +18,8 @@ namespace LandLeaserApp.Services
             //Url for the desired endpoint
             var url = $"https://landleaserapi.azurewebsites.net/api/Users/{email}";
 
+
+
             Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
             //Call the api to get info of a particular user

@@ -1,11 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using LandLeaser.API.ViewModel;
+using LandLeaser.Shared.Models;
 using LandLeaser.APP;
 using LandLeaser.APP.ViewModels;
 using LandLeaser.APP.Views;
 using LandLeaserApp.Interfaces;
-using LandLeaserApp.Models;
 using LandLeaserApp.Services;
 using Newtonsoft.Json;
 using System;
@@ -73,7 +72,6 @@ namespace LandLeaserApp.ViewModels
                     Preferences.Set(nameof(App.UserInfo), userInfoStr);
                     await SecureStorage.SetAsync(nameof(App.Token), response.Token);
                     await SecureStorage.SetAsync(nameof(App.RefreshToken), response.RefreshToken);
-                    await SecureStorage.SetAsync(nameof(App.ExpiresAt), response.ExpiresAt.ToString());
 
                     await AppShell.Current.DisplayAlert("Login", "Login was Successfull!!!", "Ok");
 

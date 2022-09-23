@@ -59,6 +59,7 @@
 	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	  <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.23.1" />
 	  <PackageReference Include="UraniumUI.Material" Version="0.11.0" />
 	</ItemGroup>
 
@@ -81,10 +82,6 @@
 	  <MauiXaml Update="Views\SignUpPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Models\" />
 	</ItemGroup>
 
 	<Import Project="..\LandLeaser.Shared\LandLeaser.Shared.projitems" Label="Shared" />
