@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace LandLeaser.API.ViewModel
+namespace LandLeaser.Shared.Models
 {
     public class LoginRequest
     {

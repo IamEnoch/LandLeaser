@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LandLeaserApp.Models
+namespace LandLeaser.Shared.Models
 {
     public class UserBasicInfo
     {

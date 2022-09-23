@@ -1,4 +1,4 @@
-﻿namespace LandLeaser.API.ViewModel
+﻿namespace LandLeaser.Shared.Models
 {
     public class LoginResult
     {
