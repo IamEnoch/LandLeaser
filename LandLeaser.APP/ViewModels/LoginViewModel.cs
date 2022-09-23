@@ -74,6 +74,7 @@ namespace LandLeaserApp.ViewModels
                     await SecureStorage.SetAsync(nameof(App.RefreshToken), response.RefreshToken);
 
                     await AppShell.Current.DisplayAlert("Login", "Login was Successfull!!!", "Ok");
+                    await Shell.Current.GoToAsync($"//{nameof(PushPage)}");
 
                 }
                 else
