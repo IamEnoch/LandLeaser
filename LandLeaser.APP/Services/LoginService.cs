@@ -1,4 +1,4 @@
-﻿using LandLeaser.API.ViewModel;
+﻿using LandLeaser.Shared.Models;
 using LandLeaserApp.Interfaces;
 using Newtonsoft.Json;
 using System;

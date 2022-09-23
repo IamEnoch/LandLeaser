@@ -1,5 +1,5 @@
 ﻿using LandLeaserApp.Interfaces;
-using LandLeaserApp.Models;
+using LandLeaser.Shared.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

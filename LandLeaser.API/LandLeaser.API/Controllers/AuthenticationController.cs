@@ -1,7 +1,6 @@
 ﻿using LandLeaser.API.Data;
 using LandLeaser.API.Data.Models;
-using LandLeaser.API.ViewModel;
-using LandLeaserApp.Models;
+using LandLeaser.Shared.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
