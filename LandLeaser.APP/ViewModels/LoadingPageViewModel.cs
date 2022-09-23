@@ -11,6 +11,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LandLeaserApp.Helpers;
 
 namespace LandLeaserApp.ViewModels
 {
@@ -18,6 +19,7 @@ namespace LandLeaserApp.ViewModels
     {
         private readonly ILoginService _loginService;
         private readonly IUserService _userService;
+        public TokenValidateHelper TokenValidater = new TokenValidateHelper();
         public LoadingPageViewModel(ILoginService loginService, IUserService userService)
         {
             _loginService = loginService;
@@ -32,17 +34,14 @@ namespace LandLeaserApp.ViewModels
 
             if (string.IsNullOrWhiteSpace(userDetailsStr))
             {
-                await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
                 // navigate to Login Page
+                await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");                
             }
             else
             {
-                //Instatialize a JwtSecurityTokenHandler
-                var handler = new JwtSecurityTokenHandler();
-
-                var token = handler.ReadJwtToken(accessToken);
-
-                if(token.ValidTo < DateTime.UtcNow)
+                //Validate the token
+                var validToken = TokenValidater.ValidateToken(accessToken);
+                if(validToken != true)
                 {
                     var tokenRequest = new TokenRequest
                     {
@@ -57,12 +56,12 @@ namespace LandLeaserApp.ViewModels
                         await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
                     }
 
-                    //Add user preferences and securely store token
+                    //Update user preferences and securely store token
                     await SecureStorage.SetAsync(nameof(App.Token), response.Token);
                     await SecureStorage.SetAsync(nameof(App.RefreshToken), response.RefreshToken);
 
-                    App.Token = accessToken;
-                    App.RefreshToken = refreshToken;
+                    App.Token = response.Token;
+                    App.RefreshToken = response.RefreshToken;
                 }
                 else
                 {
@@ -71,8 +70,10 @@ namespace LandLeaserApp.ViewModels
                     App.UserInfo = userInfo;
                     App.Token = accessToken;
                     App.RefreshToken = refreshToken;
-                }                
 
+                    await Shell.Current.DisplayAlert("Success", "No login required", "ok");
+                    await Shell.Current.GoToAsync($"//{nameof(PushPage)}");
+                }
             }
         }
     }
