@@ -4,8 +4,6 @@ using LandLeaserApp.Interfaces;
 using LandLeaserApp.Services;
 using LandLeaserApp.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
-using UraniumUI;
-using CommunityToolkit.Maui;
 
 namespace LandLeaser.APP
 {
@@ -20,10 +18,7 @@ namespace LandLeaser.APP
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 fonts.AddFont("TitilliumWeb-Regular.ttf", "TitilliumWebRegular");
                 fonts.AddFont("TitilliumWeb-SemiBold.ttf", "TitilliumWebSemibold");
-            }).ConfigureMauiHandlers(handlers =>
-            {
-                handlers.AddUraniumUIHandlers(); // 👈 This line should be added.
-            }).UseMauiCommunityToolkit();
+            });
 
             //Services
             builder.Services.AddSingleton<ILoginService, LoginService>();
