@@ -72,6 +72,8 @@ namespace LandLeaserApp.ViewModels
                     //Add user preferences and securely store token
                     Preferences.Set(nameof(App.UserInfo), userInfoStr);
                     await SecureStorage.SetAsync(nameof(App.Token), response.Token);
+                    await SecureStorage.SetAsync(nameof(App.RefreshToken), response.RefreshToken);
+                    await SecureStorage.SetAsync(nameof(App.ExpiresAt), response.ExpiresAt.ToString());
 
                     await AppShell.Current.DisplayAlert("Login", "Login was Successfull!!!", "Ok");
 
