@@ -9,7 +9,7 @@ namespace LandLeaserApp.Helpers
 {
     public class TokenValidateHelper
     {
-        public bool ValidateToken(string accessToken)
+        public async Task<bool> ValidateToken(string accessToken)
         {
             //Create JwtSecurityTokenHandler
             var handler = new JwtSecurityTokenHandler();
