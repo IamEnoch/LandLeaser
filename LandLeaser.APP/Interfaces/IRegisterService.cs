@@ -9,6 +9,6 @@ namespace LandLeaserApp.Interfaces
 {
     public interface IRegisterService
     {
-        public Task<LoginResult> CreateUser(Register registerDetails);
+        public Task<bool> CreateUser(Register registerDetails);
     }
 }

@@ -35,7 +35,7 @@ namespace LandLeaserApp.Services
             var url = $"https://landleaserapi.azurewebsites.net/api/Users/{email}";
 
             //Validate the token
-            var validToken = TokenValidater.ValidateToken(accessToken);
+            var validToken = await TokenValidater.ValidateToken(accessToken);
 
             //Refresh token
             if(validToken != true)

@@ -12,14 +12,12 @@ namespace LandLeaserApp.Services
     public class RegisterService : IRegisterService
     {
         private readonly ILoginService _loginService;
-        private readonly IUserService _userService;
         HttpClient Client = new HttpClient();
-        public RegisterService(ILoginService loginService, IUserService userService)
+        public RegisterService(ILoginService loginService)
         {
             _loginService = loginService;
-            _userService = userService;
         }
-        public async Task<LoginResult> CreateUser(Register registerDetails)
+        public async Task<bool> CreateUser(Register registerDetails)
         {
             //Base url
             var Url = "https://landleaserapi.azurewebsites.net/api/Authentication/register";
@@ -28,29 +26,15 @@ namespace LandLeaserApp.Services
             var userStr = JsonConvert.SerializeObject(registerDetails);
 
             //Convert from type string to http content
-            var content = new StringContent(userStr);
+            var content = new StringContent(userStr, Encoding.UTF8, "application/json");
 
             var response = await Client.PostAsync(Url, content);
 
             if (response.IsSuccessStatusCode)
             {
-                //Get user details using email
-
-                //Login the user
-                var result = await _loginService.Authenticate(new LoginRequest
-                {
-                    EmailAddress = registerDetails.Password,
-                    Password = registerDetails.Password
-                });
-                                
-                if(result != null)
-                {
-                    //Save preferences
-                    return result;
-                }
-                return null;
+                return true;                
             }
-            return null;
+            return false;
             
         }
     }
