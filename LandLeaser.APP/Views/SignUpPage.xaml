@@ -28,16 +28,19 @@
             <Entry
                 Placeholder="First Name"
                 Style="{StaticResource EntryLL}"
+                Text="{Binding FirstName}"
                 Margin="0,30,0,0"/>
             
             <Entry
                 Placeholder="Last Name"
                 Style="{StaticResource EntryLL}"
+                Text="{Binding LastName}"
                 Margin="0,35,0,0"/>
             
             <Entry
                 Placeholder="Email Address"
                 Style="{StaticResource EntryLL}"
+                Text="{Binding Email}"
                 Margin="0,35,0,0"/>
 
             <HorizontalStackLayout
@@ -45,22 +48,25 @@
                 <Entry
                     Placeholder="Code"
                     Style="{StaticResource EntryLL}"
+                    Text="{Binding CountryCode}"
                     Margin="0,0,68.5,0"/>
 
                 <Entry
                     Placeholder="Phone Number"
-                    Style="{StaticResource EntryLL}"/>
+                    Style="{StaticResource EntryLL}"
+                    Text="{Binding PhoneNumber}"/>
             </HorizontalStackLayout>
 
             <Entry
                 Placeholder="Password"
                 Style="{StaticResource EntryLL}"
+                Text="{Binding Password}"
                 IsPassword="True"
                 Margin="0,35,0,0"/>
 
             <Button
                 Text="Sign Up"
-                Command="{Binding DisplayLoginPageCommand}"
+                Command="{Binding RegisterCommand}"
                 Margin="0,50,0,0"/>
 
             <HorizontalStackLayout 
