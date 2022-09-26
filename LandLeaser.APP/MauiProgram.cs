@@ -35,6 +35,7 @@ namespace LandLeaser.APP
             builder.Services.AddSingleton<SignUpViewModel>();
             builder.Services.AddSingleton<LoginViewModel>();
             builder.Services.AddSingleton<AppShellViewModel>();
+            builder.Services.AddSingleton<BaseViewModel>();
 
             return builder.Build();
         }
