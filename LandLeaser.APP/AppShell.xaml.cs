@@ -11,8 +11,8 @@ namespace LandLeaser.APP
             BindingContext = new AppShellViewModel();
 
             //Explicit route registration
-            Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
-            Routing.RegisterRoute(nameof(SignUpPage), typeof(SignUpPage));
+            
+            Routing.RegisterRoute(nameof(PushPage), typeof(PushPage));
         }
     }
 }

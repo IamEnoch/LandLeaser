@@ -9,7 +9,13 @@
     
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:SignUpPage}"
-        Route="SignUpPage" />        
+        ContentTemplate="{DataTemplate local:LoadingPage}"
+        Route="SignUpPage" />
+    
+    <ShellContent
+        Title="Home2"
+        ContentTemplate="{DataTemplate local:LoginPage}"
+        Route="LoginPage" />
+
 
 </Shell>
