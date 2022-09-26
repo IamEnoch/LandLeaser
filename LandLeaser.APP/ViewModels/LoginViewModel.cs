@@ -37,7 +37,7 @@ namespace LandLeaserApp.ViewModels
         [RelayCommand]
         public async Task DisplaySignUpPage()
         {
-            await Shell.Current.GoToAsync("///SignUpPage");
+            await Shell.Current.GoToAsync($"{nameof(SignUpPage)}");
         }
 
         [RelayCommand]
