@@ -43,6 +43,7 @@ namespace LandLeaserApp.ViewModels
         [RelayCommand]
         async Task Login()
         {
+            IsBusy = true;
             //Check whether string is null or empty for both fields
             if(!String.IsNullOrEmpty(_email) && !String.IsNullOrEmpty(_password))
             {
@@ -73,18 +74,22 @@ namespace LandLeaserApp.ViewModels
                     await SecureStorage.SetAsync(nameof(App.Token), response.Token);
                     await SecureStorage.SetAsync(nameof(App.RefreshToken), response.RefreshToken);
 
+                    IsBusy = false;
+
                     await AppShell.Current.DisplayAlert("Login", "Login was Successfull!!!", "Ok");
-                    await Shell.Current.GoToAsync($"//{nameof(PushPage)}");
+                    await Shell.Current.GoToAsync($"{nameof(PushPage)}");
 
                 }
                 else
                 {
+                    IsBusy = false;
                     await AppShell.Current.DisplayAlert("Login", "Login was unsuccessfull!!!", "Ok");
                 }
                 
             }
             else
             {
+                IsBusy = false;
                 await AppShell.Current.DisplayAlert("Error", "Enter all fields", "Ok");
             }
             

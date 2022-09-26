@@ -15,7 +15,7 @@ using LandLeaserApp.Helpers;
 
 namespace LandLeaserApp.ViewModels
 {
-    public  partial class LoadingPageViewModel : BaseViewModel
+    public partial class LoadingPageViewModel : BaseViewModel
     {
         private readonly ILoginService _loginService;
         private readonly IUserService _userService;
@@ -26,7 +26,7 @@ namespace LandLeaserApp.ViewModels
             _userService = userService;
             CheckUserLoginDetails();
         }
-        private async void CheckUserLoginDetails()
+        async Task CheckUserLoginDetails()
         {
             string userDetailsStr = Preferences.Get(nameof(App.UserInfo), "");
             string accessToken = await SecureStorage.GetAsync(nameof(App.Token));
@@ -39,6 +39,8 @@ namespace LandLeaserApp.ViewModels
             }
             else
             {
+                IsBusy = true;
+
                 //Validate the token
                 var validToken = TokenValidater.ValidateToken(accessToken);
                 if(validToken != true)
@@ -49,19 +51,29 @@ namespace LandLeaserApp.ViewModels
                         RefreshToken = refreshToken
                     };
 
+                    
                     //call refresh token method
                     var response = await _loginService.RefreshToken(tokenRequest);
+                    if(response == null)
                     {
+                        IsBusy = false;
                         await Shell.Current.DisplayAlert("Fail", "Refreshing token unsuccessful", "ok");
                         await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
                     }
+                    else
+                    {
+                        //Update user preferences and securely store token
+                        await SecureStorage.SetAsync(nameof(App.Token), response.Token);
+                        await SecureStorage.SetAsync(nameof(App.RefreshToken), response.RefreshToken);
 
-                    //Update user preferences and securely store token
-                    await SecureStorage.SetAsync(nameof(App.Token), response.Token);
-                    await SecureStorage.SetAsync(nameof(App.RefreshToken), response.RefreshToken);
+                        App.Token = response.Token;
+                        App.RefreshToken = response.RefreshToken;
 
-                    App.Token = response.Token;
-                    App.RefreshToken = response.RefreshToken;
+                        IsBusy = false;
+
+                        await Shell.Current.DisplayAlert("Success", "No login required", "ok");
+                        await Shell.Current.GoToAsync($"{nameof(PushPage)}");
+                    }                    
                 }
                 else
                 {
@@ -71,9 +83,12 @@ namespace LandLeaserApp.ViewModels
                     App.Token = accessToken;
                     App.RefreshToken = refreshToken;
 
+                    IsBusy = false;
+
                     await Shell.Current.DisplayAlert("Success", "No login required", "ok");
-                    await Shell.Current.GoToAsync($"//{nameof(PushPage)}");
+                    await Shell.Current.GoToAsync($"{nameof(PushPage)}");
                 }
+
             }
         }
     }
