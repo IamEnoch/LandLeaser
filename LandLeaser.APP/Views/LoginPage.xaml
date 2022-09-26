@@ -63,6 +63,13 @@
                        TextColor="{StaticResource PrimaryColor}"/>
                 </ContentView>
             </HorizontalStackLayout>
+
+            <ActivityIndicator     
+                IsVisible="{Binding IsBusy}"
+                IsRunning="{Binding IsBusy}"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="CenterAndExpand"/>
+
         </VerticalStackLayout>
     </Grid>
 </ContentPage>

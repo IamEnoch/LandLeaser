@@ -1,4 +1,3 @@
-using Android.Content;
 using LandLeaserApp.ViewModels;
 
 namespace LandLeaser.APP.Views;
