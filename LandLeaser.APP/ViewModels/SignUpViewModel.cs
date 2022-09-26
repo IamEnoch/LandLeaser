@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using LandLeaser.APP.Views;
 using LandLeaser.Shared.Models;
 using LandLeaserApp.Interfaces;
+using LandLeaserApp.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,14 +15,6 @@ namespace LandLeaser.APP.ViewModels
 {
     public partial class SignUpViewModel : BaseViewModel
     {
-        private readonly IRegisterService _registerService;
-        private readonly IUserService _userService;
-        public SignUpViewModel(IRegisterService registerService)
-        {
-            Title = nameof(SignUpPage);
-            _registerService = registerService;
-        }
-
         [ObservableProperty]
         string _firstName;
 
@@ -39,6 +32,17 @@ namespace LandLeaser.APP.ViewModels
 
         [ObservableProperty]
         string _password;
+
+        private readonly IRegisterService _registerService;
+        private readonly IUserService _userService; 
+        private readonly ILoginService _loginService;
+        public SignUpViewModel(IRegisterService registerService, IUserService userService, ILoginService loginService)
+        {
+            Title = nameof(SignUpPage);
+            _registerService = registerService;
+            _userService = userService;
+            _loginService = loginService;
+        }       
 
         [RelayCommand]
         async Task Register()
@@ -58,30 +62,46 @@ namespace LandLeaser.APP.ViewModels
                     Password = _password
                 });
 
-                if (result != null)
+                if (result == true)
                 {
-                    //Set the neceessary credentials
-                    //Remove existing preference details
-                    if (Preferences.ContainsKey(nameof(App.UserInfo)))
+                    var loginResult = await _loginService.Authenticate(new LoginRequest
                     {
-                        Preferences.Remove(nameof(App.UserInfo));
+                        EmailAddress = _email,
+                        Password = _password,
+                    });
+
+                    if (loginResult != null)
+                    {
+                        //Set the neceessary credentials
+                        //Remove existing preference details
+                        if (Preferences.ContainsKey(nameof(App.UserInfo)))
+                        {
+                            Preferences.Remove(nameof(App.UserInfo));
+                        }
+
+                        //Desired infromation to be stored
+                        var userDetails = await _userService.GetUser(_email, loginResult.Token);
+                        var userInfoStr = JsonConvert.SerializeObject(userDetails);
+
+                        //Add user preferences and securely store token
+                        Preferences.Set(nameof(App.UserInfo), userInfoStr);
+                        await SecureStorage.SetAsync(nameof(App.Token), loginResult.Token);
+                        await SecureStorage.SetAsync(nameof(App.RefreshToken), loginResult.RefreshToken);
+
+                        IsBusy = false; ;
+
+                        await AppShell.Current.DisplayAlert("Register", "Registration was Successfull!!!", "Ok");
+                        await Shell.Current.GoToAsync($"{nameof(PushPage)}");
                     }
-
-                    //Desired infromation to be stored
-                    var userDetails = await _userService.GetUser(Email, result.Token);
-                    var userInfoStr = JsonConvert.SerializeObject(userDetails);
-
-                    //Add user preferences and securely store token
-                    Preferences.Set(nameof(App.UserInfo), userInfoStr);
-                    await SecureStorage.SetAsync(nameof(App.Token), result.Token);
-                    await SecureStorage.SetAsync(nameof(App.RefreshToken), result.RefreshToken);
-
-                    IsBusy = false; ;
-
-                    await AppShell.Current.DisplayAlert("Register", "Registration was Successfull!!!", "Ok");
-                    await Shell.Current.GoToAsync($"{nameof(PushPage)}");
-
+                    //Login after registration unsuccessful
+                    else
+                    {
+                        IsBusy = false;
+                        await AppShell.Current.DisplayAlert("Register", "Registration was successfull login unsuccessfull!!!", "Ok");
+                    }
                 }
+
+                //Api call = User not created
                 else
                 {
                     IsBusy = false;

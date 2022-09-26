@@ -42,7 +42,7 @@ namespace LandLeaserApp.ViewModels
                 IsBusy = true;
 
                 //Validate the token
-                var validToken = TokenValidater.ValidateToken(accessToken);
+                var validToken = await TokenValidater.ValidateToken(accessToken);
                 if(validToken != true)
                 {
                     var tokenRequest = new TokenRequest
