@@ -32,6 +32,7 @@ namespace LandLeaser.APP
             builder.Services.AddSingleton<PushPage>();
 
             //ViewModel
+            builder.Services.AddSingleton<PushPageViewModel>();
             builder.Services.AddSingleton<LoadingPageViewModel>();
             builder.Services.AddSingleton<SignUpViewModel>();
             builder.Services.AddSingleton<LoginViewModel>();
