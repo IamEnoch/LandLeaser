@@ -65,7 +65,7 @@ namespace LandLeaserApp.ViewModels
                         Preferences.Remove(nameof(App.UserInfo));
                     }
 
-                    //Desired infromation to be stored
+                    //Desired information to be stored
                     var userDetails = await _userService.GetUser(Email, response.Token);
                     var userInfoStr = JsonConvert.SerializeObject(userDetails);
 
@@ -76,14 +76,14 @@ namespace LandLeaserApp.ViewModels
 
                     IsBusy = false;
 
-                    await AppShell.Current.DisplayAlert("Login", "Login was Successfull!!!", "Ok");
+                    await AppShell.Current.DisplayAlert("Login", "Login was Successful!!!", "Ok");
                     await Shell.Current.GoToAsync($"{nameof(PushPage)}");
 
                 }
                 else
                 {
                     IsBusy = false;
-                    await AppShell.Current.DisplayAlert("Login", "Login was unsuccessfull!!!", "Ok");
+                    await AppShell.Current.DisplayAlert("Login", "Login was unsuccessful!!!", "Ok");
                 }
                 
             }
