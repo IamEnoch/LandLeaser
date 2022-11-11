@@ -9,5 +9,8 @@ namespace LandLeaser.API.Data.Models
         public string LastName { get; set; }
         //public string Email { get; set; }
         public string PhoneNumber { get; set; }
+
+        //Navigation properties
+        public virtual ICollection<Listing> Listings { get; set; }              
     }
 }

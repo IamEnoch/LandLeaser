@@ -11,7 +11,8 @@ namespace LandLeaser.API.Data
         {
 
         }
-        public  DbSet<Listing> Listings { get; set; }
+        public DbSet<Listing> Listings { get; set; }
+        public DbSet<ListingImage> Images { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
     }
 }

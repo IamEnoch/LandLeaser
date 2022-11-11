@@ -1,4 +1,5 @@
-﻿using Azure.Storage.Blobs;
+﻿/*
+using Azure.Storage.Blobs;
 using Azure.Storage;
 using Microsoft.Azure.Management.Storage.Models;
 
@@ -47,6 +48,7 @@ namespace LandLeaser.API.Interfaces
         /// <param name="uniqueStorageName"></param>
         /// <param name="artistId"></param>
         /// <returns></returns>
-        /*ArtImage GetArtImages(string containerName, string uniqueStorageName, string artistId);*/
+        /*ArtImage GetArtImages(string containerName, string uniqueStorageName, string artistId);#1#
     }
 }
+*/
