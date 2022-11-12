@@ -68,7 +68,7 @@ builder.Services.AddSwaggerGen(options =>
             Url = new Uri("https://landleaserapi.azurewebsites.net/swagger/index.html")
         }
     });
-    /*options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = @"JWT Authorization header using the Bearer scheme. 
           Enter 'Bearer' [space] and then your token in the text input below.
@@ -93,7 +93,7 @@ builder.Services.AddSwaggerGen(options =>
             },
             new List<string>()
         }
-    });*/
+    });
 });
 
 builder.Services.AddControllers();
