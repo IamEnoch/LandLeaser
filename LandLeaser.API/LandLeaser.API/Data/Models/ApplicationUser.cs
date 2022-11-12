@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace LandLeaser.API.Data.Models
@@ -11,6 +12,7 @@ namespace LandLeaser.API.Data.Models
         public string PhoneNumber { get; set; }
 
         //Navigation properties
+        [JsonIgnore]
         public virtual ICollection<Listing> Listings { get; set; }              
     }
 }

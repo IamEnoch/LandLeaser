@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace LandLeaser.API.Data.Models
 {
@@ -11,7 +12,7 @@ namespace LandLeaser.API.Data.Models
         [ForeignKey(nameof(Listing))]
         public Guid ListingId { get; set; }
 
-
+        [JsonIgnore]
         public virtual Listing Listing { get; set; }
 
     }
