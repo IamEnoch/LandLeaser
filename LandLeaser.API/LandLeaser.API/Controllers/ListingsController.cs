@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LandLeaser.API.Data;
 using LandLeaser.API.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LandLeaser.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ListingsController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -23,29 +25,42 @@ namespace LandLeaser.API.Controllers
 
         // GET: api/Listings
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Listing>>> GetListings()
+        public async Task<ActionResult<IList<Listing>>> GetListings()
         {
             if (_context.Listings == null)
             {
                 return NotFound();
             }
-            return await _context.Listings.ToListAsync();
 
-        }
+            var query = _context.Listings
+                .Join(_context.Images, c => c.Id, v => v.ListingId, (c, v) => new { c, v });
 
-        // GET: api/Images
-        [HttpGet("api/Images")]
-        public async Task<ActionResult<IEnumerable<ListingImage>>> GetImages()
-        {
-            if (_context.Images == null)
+            var listings = new List<Listing>();
+            foreach (var VARIABLE in query)
             {
-                return NotFound();
+                var listing = new Listing()
+                {
+                    Id = VARIABLE.c.Id,
+                    Location = VARIABLE.c.Location,
+                    Size = VARIABLE.c.Size,
+                    Cost = VARIABLE.c.Cost,
+                    Duration = VARIABLE.c.Duration,
+                    Description = VARIABLE.c.Description,
+                    AppUserId = VARIABLE.c.AppUserId,
+                    Images = VARIABLE.c.Images,
+                    ApplicationUser = VARIABLE.c.ApplicationUser
+                };
+                listings.Add(listing);
+
             }
-            return await _context.Images.ToListAsync();
+
+            return listings;
+            
 
         }
 
-        // GET: api/Listings/5
+
+        // GET: api/Listings/93345CA0-30F1-48C1-8B42-DC7C8DE88B60
         [HttpGet("{id}")]
         public async Task<ActionResult<Listing>> GetListing(Guid id)
         {
@@ -60,10 +75,17 @@ namespace LandLeaser.API.Controllers
                 return NotFound();
             }
 
-            return listing;
+            var query = _context.Images.Where(c => c.ListingId == id);
+            foreach (var listingImage in query)
+            {
+                listing.Images.Add(listingImage);
+            }
+
+
+            return Ok(listing);
         }
 
-        // PUT: api/Listings/5
+        // PUT: api/Listings/14ab1492-f6f0-434a-8090-9e81ad1d2c99
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutListing(Guid id, Listing listing)
@@ -109,7 +131,7 @@ namespace LandLeaser.API.Controllers
             return CreatedAtAction("GetListing", new { id = listing.Id }, listing);
         }
 
-        // DELETE: api/Listings/5
+        // DELETE: api/Listings/14ab1492-f6f0-434a-8090-9e81ad1d2c99
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteListing(Guid id)
         {
