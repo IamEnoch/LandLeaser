@@ -32,18 +32,16 @@ namespace LandLeaserApp.Helpers
         /// </summary>
         /// <param name="endpoint">Specific endpoint for the get call</param>
         /// <returns></returns>
-        public async Task<ResponseMessage> GetAsync<T>(string endpoint)
+        public async Task<(ResponseMessage, HttpResponseMessage)> GetAsync<T>(string endpoint)
         {
             var response = await Client.GetAsync(endpoint);
 
             if (!response.IsSuccessStatusCode)
                 return default;
+            
+            //var responseContent = await response.Content.ReadFromJsonAsync<T>();
 
-            var responseContent = await response.Content.ReadFromJsonAsync<T>();
-
-            return new ResponseMessage(responseContent, response.StatusCode, response.IsSuccessStatusCode);
+            return (new ResponseMessage(response.StatusCode, response.IsSuccessStatusCode), response);
         }
-
-
     }
 }
