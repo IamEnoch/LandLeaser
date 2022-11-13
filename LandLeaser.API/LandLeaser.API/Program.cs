@@ -1,10 +1,12 @@
 using LandLeaser.API.Data;
 using LandLeaser.API.Data.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-    //Configure DbContext with sql
+//Configure DbContext with sql
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 
 var tokenValidationParameters = new TokenValidationParameters()
@@ -39,11 +41,11 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
 
 //Add Authentication
 builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-})
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
     //Add JWT bearer = mechanism that validates the token
     .AddJwtBearer(options =>
     {
@@ -94,6 +96,7 @@ builder.Services.AddSwaggerGen(options =>
             new List<string>()
         }
     });
+    //options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
 
 builder.Services.AddControllers();
@@ -123,3 +126,28 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+/*public class SecurityRequirementsOperationFilter : IOperationFilter
+{
+    public void Apply(OpenApiOperation operation, OperationFilterContext context)
+    {
+        if (!context.MethodInfo.GetCustomAttributes(true).Any(x => x is AllowAnonymousAttribute) &&
+            !(context.MethodInfo.DeclaringType?.GetCustomAttributes(true).Any(x => x is AllowAnonymousAttribute) ?? false))
+        {
+            operation.Security = new List<OpenApiSecurityRequirement>
+            {
+                new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme {
+                            Reference = new OpenApiReference {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "bearer"
+                            }
+                        }, new string[] { }
+                    }
+                }
+            };
+        }
+    }
+};*/

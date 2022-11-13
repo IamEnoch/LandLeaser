@@ -25,6 +25,7 @@ namespace LandLeaser.API.Controllers
 
         // GET: api/Listings
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IList<Listing>>> GetListings()
         {
             if (_context.Listings == null)
