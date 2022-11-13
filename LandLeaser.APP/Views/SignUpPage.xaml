@@ -17,8 +17,6 @@
         </Grid.RowDefinitions>
         <VerticalStackLayout Grid.Column="1"
                              Grid.Row="1">
-            <Image
-                Source="appicon.svg"/>
             
             <Label
                 Text="Register"
