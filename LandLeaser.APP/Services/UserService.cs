@@ -43,15 +43,16 @@ namespace LandLeaserApp.Services
                 var tokenRequest = new TokenRequest()
                 {
                     Token = accessToken,
-                    RefreshToken = Preferences.Get(nameof(App.RefreshToken), "")
+                    //RefreshToken = Preferences.Get(nameof(App.RefreshToken), "");
+                    RefreshToken = await SecureStorage.GetAsync(nameof(App.RefreshToken))
                 };
 
                 var tokenRefreshResult = await _loginService.RefreshToken(tokenRequest);
                 accessToken = tokenRefreshResult.Token;
 
-                //Set the new preferences
-                Preferences.Set(nameof(App.Token), tokenRefreshResult.Token);
-                Preferences.Set(nameof(App.RefreshToken), tokenRefreshResult.RefreshToken);
+                //Set the new security sensitive preferences
+                await SecureStorage.SetAsync(nameof(App.Token), tokenRefreshResult.Token);
+                await SecureStorage.SetAsync(nameof(App.Token), tokenRefreshResult.RefreshToken);
 
             }
 
@@ -70,7 +71,8 @@ namespace LandLeaserApp.Services
 
                 return userDetails;
             }
-            else { return null; }
+
+            return null;
         }
     }
 }
