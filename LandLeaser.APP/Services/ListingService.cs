@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using LandLeaser.Shared.DTOs;
@@ -22,7 +23,9 @@ namespace LandLeaserApp.Services
 
             var response = await Client.GetAsync<List<GetListingDto>>(endpoint);
 
-            return (List<GetListingDto>)response.ResponseItem;
+            var listings = await response.Item2.Content.ReadFromJsonAsync<List<GetListingDto>>();
+            
+            return listings;
 
         }
 
@@ -33,7 +36,9 @@ namespace LandLeaserApp.Services
 
             var response = await Client.GetAsync<GetListingDto>(endpoint);
 
-            return (GetListingDto)response.ResponseItem;
+            var listing = await response.Item2.Content.ReadFromJsonAsync<GetListingDto>();
+
+            return listing;
         }
     }
 }

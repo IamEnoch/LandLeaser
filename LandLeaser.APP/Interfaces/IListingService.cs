@@ -14,7 +14,7 @@ namespace LandLeaserApp.Interfaces
         /// </summary>
         /// <param name="authToken">Bearer authentication token</param>
         /// <returns></returns>
-        public Task <List<GetListingDto>> GetListingsAsync (string authToken);
+        public Task <List<GetListingDto>> GetListingsAsync (string authToken = null);
 
         /// <summary>
         /// Gets a specific listing
