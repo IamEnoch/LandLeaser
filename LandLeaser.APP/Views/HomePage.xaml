@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LandLeaserApp.Views.HomePage"
+             xmlns:model="clr-namespace:LandLeaser.Shared.DTOs"
+             xmlns:ViewModel="clr-namespace:LandLeaserApp.ViewModels"
+             x:DataType="ViewModel:HomePageViewModel"
+             Title="PushPage">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="35"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="35"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="24"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <VerticalStackLayout
+            Grid.Column="1"
+            Grid.Row="1">
+            
+            <CollectionView ItemsSource="{Binding Listing}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:CreateListingDto">
+                        <VerticalStackLayout>
+                            <Image Source="{Binding Images[1]}"/>
+                            <Label
+                                Text="{Binding Cost}"
+                                TextColor="{StaticResource Black}"
+                                Style="{StaticResource LabelMedium}"/>
+                            <Label
+                                Text="{Binding Size}"
+                                TextColor="{StaticResource Black}"
+                                Style="{StaticResource BodyMedium}"/>
+                            <Label
+                                Text="{Binding Location}"
+                                TextColor="{StaticResource Black}"
+                                Style="{StaticResource BodySmall}"/>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
