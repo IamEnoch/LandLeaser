@@ -78,7 +78,7 @@ namespace LandLeaserApp.ViewModels
                     IsBusy = false;
 
                     await AppShell.Current.DisplayAlert("Login", "Login was Successful!!!", "Ok");
-                    await Shell.Current.GoToAsync($"{nameof(PushPage)}");
+                    await Shell.Current.GoToAsync($"{nameof(HomePage)}");
 
                 }
                 else
