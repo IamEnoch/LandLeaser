@@ -7,7 +7,7 @@ using LandLeaser.Shared.DTOs;
 
 namespace LandLeaserApp.Interfaces
 {
-    interface IListingService
+    public interface IListingService
     {
         /// <summary>
         /// Method that gets all listings
