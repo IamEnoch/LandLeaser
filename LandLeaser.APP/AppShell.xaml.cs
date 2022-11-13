@@ -1,5 +1,6 @@
 ﻿using LandLeaser.APP.Views;
 using LandLeaserApp.ViewModels;
+using LandLeaserApp.Views;
 
 namespace LandLeaser.APP
 {
@@ -12,7 +13,7 @@ namespace LandLeaser.APP
 
             //Explicit route registration
             
-            Routing.RegisterRoute(nameof(PushPage), typeof(PushPage));
+            Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
         }
     }
 }

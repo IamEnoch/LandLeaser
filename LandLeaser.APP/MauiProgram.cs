@@ -31,13 +31,13 @@ namespace LandLeaser.APP
             builder.Services.AddSingleton<LoadingPage>();
             builder.Services.AddTransient<SignUpPage>();
             builder.Services.AddTransient<LoginPage>();
-            builder.Services.AddSingleton<PushPage>();
+            builder.Services.AddTransient<HomePage>();
 
             //ViewModel
-            builder.Services.AddSingleton<HomePageViewModel>();
+            builder.Services.AddTransient<HomePageViewModel>();
             builder.Services.AddSingleton<LoadingPageViewModel>();
             builder.Services.AddSingleton<SignUpViewModel>();
-            builder.Services.AddSingleton<LoginViewModel>();
+            builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddSingleton<AppShellViewModel>();
             builder.Services.AddSingleton<BaseViewModel>();
 

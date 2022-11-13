@@ -22,4 +22,5 @@
         ContentTemplate="{DataTemplate local:SignUpPage}"
         Route="SignUpPage" />
 
+
 </Shell>
