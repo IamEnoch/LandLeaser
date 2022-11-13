@@ -9,6 +9,9 @@
     <Import_RootNamespace>LandLeaser.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)DTOs\CreateListingDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DTOs\GetListingDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\ListingImage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\LoginResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\LoginRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Register.cs" />
