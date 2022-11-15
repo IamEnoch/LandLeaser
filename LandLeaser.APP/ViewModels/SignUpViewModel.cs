@@ -92,7 +92,7 @@ namespace LandLeaser.APP.ViewModels
                         IsBusy = false; ;
 
                         await AppShell.Current.DisplayAlert("Register", "Registration was Successfull!!!", "Ok");
-                        await Shell.Current.GoToAsync($"{nameof(HomePage)}");
+                        await Shell.Current.GoToAsync($"///{nameof(HomePage)}");
                     }
                     //Login after registration unsuccessful
                     else

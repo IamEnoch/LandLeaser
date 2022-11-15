@@ -27,8 +27,6 @@ namespace LandLeaserApp.ViewModels
         {
             _loginService = loginService;
             _userService = userService;
-            Check();
-
         }
 
         /// <summary>

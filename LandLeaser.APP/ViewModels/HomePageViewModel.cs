@@ -4,8 +4,11 @@ using LandLeaser.APP.ViewModels;
 using LandLeaser.APP.Views;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using LandLeaser.Shared.DTOs;
 using LandLeaserApp.Interfaces;
+using LandLeaserApp.Services;
 using LandLeaserApp.Views;
 
 namespace LandLeaserApp.ViewModels
@@ -14,11 +17,14 @@ namespace LandLeaserApp.ViewModels
     {
         public ObservableCollection<GetListingDto>? Listing { get; } = new();
         private readonly IListingService _listingService;
+        private readonly IRestService _restService;
 
-        public HomePageViewModel(IListingService listingService)
+        public HomePageViewModel(IListingService listingService, IRestService restService)
         {
             Title = nameof(HomePage);
             _listingService = listingService;
+            _restService = restService;
+            GetItems();
         }
         
 
@@ -36,22 +42,24 @@ namespace LandLeaserApp.ViewModels
 
                 IsBusy = true;
 
-                //ge listings from the api
+                //get listings from the api
 
-                //var response = await _listingService.GetListingsAsync();
-
-                /*if (response != null) ;
+                //var response = await check.GetListingsAsync(await SecureStorage.GetAsync(nameof(App.Token)));
+                /*var response =
+                    await _restService.GetItemsAsync<GetListingDto>(
+                        await SecureStorage.GetAsync(nameof(App.Token)), "api/Listings");*/
+                var response = await _listingService.GetListingsAsync(await SecureStorage.GetAsync(nameof(App.Token)));
+                if (response.Item1 != null)
                 {
-                    foreach (var listing in await _listingService.GetListingsAsync())
+                    foreach (var listing in response.Item1)
                     {
                         Listing.Add(listing);
                     }
-                }*/
-                foreach (var listing in await _listingService.GetListingsAsync())
-                {
-                    Listing.Add(listing);
                 }
-
+                else
+                {
+                    await Shell.Current.DisplayAlert("ERROR", "Terrible error in the api call result", "OK");
+                }
             }
             catch (Exception ex)
             {
@@ -62,9 +70,6 @@ namespace LandLeaserApp.ViewModels
             {
                 IsBusy = false;
             }
-
-
-
         }
         /// <summary>
         /// Sign out command
