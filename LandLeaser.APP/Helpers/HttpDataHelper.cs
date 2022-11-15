@@ -11,19 +11,17 @@ namespace LandLeaserApp.Helpers
 {
     public class HttpDataHelper
     {
-        public HttpClient Client { get; set; }
+        private HttpClient _client = new();
 
         public HttpDataHelper(string baseAddress, string authToken, IDictionary<string, string> headersDictionary = null)
         {
-            Client = new HttpClient();
+            _client.BaseAddress = new Uri(baseAddress);
 
-            Client.BaseAddress = new Uri(baseAddress);
-
-            Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
             foreach (var header in headersDictionary)
             {
-                Client.DefaultRequestHeaders.Add(header.Key, header.Value);
+                _client.DefaultRequestHeaders.Add(header.Key, header.Value);
             }
         }
 
@@ -32,16 +30,16 @@ namespace LandLeaserApp.Helpers
         /// </summary>
         /// <param name="endpoint">Specific endpoint for the get call</param>
         /// <returns></returns>
-        public async Task<(ResponseMessage, HttpResponseMessage)> GetAsync<T>(string endpoint)
+        public async Task<(ResponseMessage, T)> GetAsync<T>(string endpoint)
         {
-            var response = await Client.GetAsync(endpoint);
+            var response = await _client.GetAsync(endpoint);
 
             if (!response.IsSuccessStatusCode)
                 return default;
             
-            //var responseContent = await response.Content.ReadFromJsonAsync<T>();
+            var responseContent = await response.Content.ReadFromJsonAsync<T>();
 
-            return (new ResponseMessage(response.StatusCode, response.IsSuccessStatusCode), response);
+            return (new ResponseMessage(response.StatusCode, response.IsSuccessStatusCode), responseContent);
         }
     }
 }
