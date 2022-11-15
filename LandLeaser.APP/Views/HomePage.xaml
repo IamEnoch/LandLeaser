@@ -5,7 +5,7 @@
              xmlns:model="clr-namespace:LandLeaser.Shared.DTOs"
              xmlns:ViewModel="clr-namespace:LandLeaserApp.ViewModels"
              x:DataType="ViewModel:HomePageViewModel"
-             Title="PushPage">
+             Title="{Binding Title}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="35"/>
@@ -23,9 +23,9 @@
             
             <CollectionView ItemsSource="{Binding Listing}">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:CreateListingDto">
+                    <DataTemplate x:DataType="model:GetListingDto">
                         <VerticalStackLayout>
-                            <Image Source="{Binding Images[1]}"/>
+                            <Image Source="{Binding Images[0].ImageUrl}"/>
                             <Label
                                 Text="{Binding Cost}"
                                 TextColor="{StaticResource Black}"

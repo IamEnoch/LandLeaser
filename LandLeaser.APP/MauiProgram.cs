@@ -1,5 +1,6 @@
 ﻿using LandLeaser.APP.ViewModels;
 using LandLeaser.APP.Views;
+using LandLeaserApp.Helpers;
 using LandLeaserApp.Interfaces;
 using LandLeaserApp.Services;
 using LandLeaserApp.ViewModels;
@@ -26,6 +27,7 @@ namespace LandLeaser.APP
             builder.Services.AddSingleton<IUserService, UserService>();
             builder.Services.AddSingleton<IRegisterService, RegisterService>();
             builder.Services.AddSingleton<IListingService, ListingService>();
+            builder.Services.AddSingleton<IRestService, RestService>();
 
             //Views
             builder.Services.AddSingleton<LoadingPage>();
@@ -38,8 +40,11 @@ namespace LandLeaser.APP
             builder.Services.AddSingleton<LoadingPageViewModel>();
             builder.Services.AddSingleton<SignUpViewModel>();
             builder.Services.AddTransient<LoginViewModel>();
-            builder.Services.AddSingleton<AppShellViewModel>();
+            builder.Services.AddTransient<AppShellViewModel>();
             builder.Services.AddSingleton<BaseViewModel>();
+
+            //DataHelpers
+            builder.Services.AddSingleton<HttpDataHelper>();
 
             return builder.Build();
         }
