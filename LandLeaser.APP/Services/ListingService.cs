@@ -12,33 +12,28 @@ namespace LandLeaserApp.Services
 {
     public class ListingService : IListingService
     {
-        public HttpDataHelper Client { get; set; }
-
-        public String BaseAddress = "https://landleaserapi.azurewebsites.net/";
-
+        private readonly IRestService _restService;
+        public ListingService(IRestService restService)
+        {
+            _restService = restService;
+        }
+        
         public async Task<List<GetListingDto>> GetListingsAsync(string authToken)
         {
-            string endpoint = "api/listings";
-            Client = new HttpDataHelper(BaseAddress, authToken);
-
-            var response = await Client.GetAsync<List<GetListingDto>>(endpoint);
-
-            var listings = await response.Item2.Content.ReadFromJsonAsync<List<GetListingDto>>();
+            string endpoint = "api/Listings";
             
-            return listings;
+            var response = await _restService.GetItemsAsync<GetListingDto>(authToken, endpoint);
 
+            return response;
         }
 
         public async Task<GetListingDto> GetListingAsync(string authToken, string id)
         {
             string endpoint = $"api/listing/{id}";
-            Client = new HttpDataHelper(BaseAddress, authToken);
 
-            var response = await Client.GetAsync<GetListingDto>(endpoint);
+            var response = await _restService.GetItemAsync<GetListingDto>(authToken, id, endpoint);
 
-            var listing = await response.Item2.Content.ReadFromJsonAsync<GetListingDto>();
-
-            return listing;
+            return response;
         }
     }
 }
