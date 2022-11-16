@@ -16,32 +16,32 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="24"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="55"/>
         </Grid.RowDefinitions>
-        <VerticalStackLayout
-            Grid.Column="1"
-            Grid.Row="1">
-            
-            <CollectionView ItemsSource="{Binding Listing}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:GetListingDto">
-                        <VerticalStackLayout>
-                            <Image Source="{Binding Images[0].ImageUrl}"/>
-                            <Label
-                                Text="{Binding Cost}"
-                                TextColor="{StaticResource Black}"
-                                Style="{StaticResource LabelMedium}"/>
-                            <Label
-                                Text="{Binding Size}"
-                                TextColor="{StaticResource Black}"
-                                Style="{StaticResource BodyMedium}"/>
-                            <Label
-                                Text="{Binding Location}"
-                                TextColor="{StaticResource Black}"
-                                Style="{StaticResource BodySmall}"/>
-                        </VerticalStackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </VerticalStackLayout>
+
+        <CollectionView ItemsSource="{Binding Listing}"
+                        Grid.Row="1"
+                        Grid.Column="1">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:GetListingDto">
+                    <VerticalStackLayout>
+                        <Image Source="{Binding Images[0].ImageUrl}"/>
+                        <Label
+                            Text="{Binding Cost}"
+                            TextColor="{StaticResource Black}"
+                            Style="{StaticResource LabelMedium}"/>
+                        <Label
+                            Text="{Binding Size}"
+                            TextColor="{StaticResource Black}"
+                            Style="{StaticResource BodyMedium}"/>
+                        <Label
+                            Text="{Binding Location}"
+                            TextColor="{StaticResource Black}"
+                            Style="{StaticResource BodySmall}"/>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
     </Grid>
 </ContentPage>

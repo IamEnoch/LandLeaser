@@ -42,9 +42,7 @@ namespace LandLeaser.APP
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<AppShellViewModel>();
             builder.Services.AddSingleton<BaseViewModel>();
-
-            //DataHelpers
-            builder.Services.AddSingleton<HttpDataHelper>();
+            
 
             return builder.Build();
         }

@@ -4,24 +4,32 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:LandLeaser.APP.Views"
-    xmlns:views="using:LandLeaserApp.Views"
-    xmlns:views1="clr-namespace:LandLeaserApp.Views"
-    Shell.FlyoutBehavior="Flyout"
-    Shell.NavBarIsVisible="True">
+    xmlns:views="clr-namespace:LandLeaserApp.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.NavBarIsVisible="False">
     
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:LoadingPage}"
-        Route="LoadingPage" />
-    
-    <ShellContent
-        Title="LoginPage"
-        ContentTemplate="{DataTemplate local:LoginPage}"
-        Route="LoginPage" />
+   <TabBar>
+        <Tab
+            Title="Explore"
+            Icon="explore.png">
+            <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
+        </Tab>
+        <Tab
+            Title="wish list"
+            Icon="wishlist.png">
+            <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
+        </Tab>
+        <Tab
+            Title="Messages"
+            Icon="message.png">
+            <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
 
-    <ShellContent
-        Title="SignUpPage"
-        ContentTemplate="{DataTemplate local:SignUpPage}"
-        Route="SignUpPage" />
+        </Tab>
+        <Tab
+            Title="Profile"
+            Icon="profile.png">
+            <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
+        </Tab>
+    </TabBar>
 
 </Shell>
