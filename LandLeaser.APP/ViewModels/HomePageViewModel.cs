@@ -17,13 +17,11 @@ namespace LandLeaserApp.ViewModels
     {
         public ObservableCollection<GetListingDto>? Listing { get; } = new();
         private readonly IListingService _listingService;
-        private readonly IRestService _restService;
 
-        public HomePageViewModel(IListingService listingService, IRestService restService)
+        public HomePageViewModel(IListingService listingService)
         {
             Title = nameof(HomePage);
             _listingService = listingService;
-            _restService = restService;
             GetItems();
         }
         
@@ -49,9 +47,9 @@ namespace LandLeaserApp.ViewModels
                     await _restService.GetItemsAsync<GetListingDto>(
                         await SecureStorage.GetAsync(nameof(App.Token)), "api/Listings");*/
                 var response = await _listingService.GetListingsAsync(await SecureStorage.GetAsync(nameof(App.Token)));
-                if (response.Item1 != null)
+                if (response != null)
                 {
-                    foreach (var listing in response.Item1)
+                    foreach (var listing in response)
                     {
                         Listing.Add(listing);
                     }
