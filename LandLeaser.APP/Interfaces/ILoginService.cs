@@ -9,7 +9,7 @@ namespace LandLeaserApp.Interfaces
 {
     public interface ILoginService
     {
-        public Task<LoginResult> Authenticate(LoginRequest loginRequest);
-        public Task<LoginResult> RefreshToken(TokenRequest tokenRequest);
+        public Task<LoginResult> Authenticate(LoginRequest loginRequest, string authToken = null);
+        public Task<LoginResult> RefreshToken(TokenRequest tokenRequest, string authToken = null);
     }
 }

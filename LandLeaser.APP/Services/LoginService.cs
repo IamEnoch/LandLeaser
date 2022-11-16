@@ -12,68 +12,39 @@ namespace LandLeaserApp.Services
 {
     public class LoginService : ILoginService
     {
-        HttpClient Client = new HttpClient();
+        private readonly IRestService _restService;
+        public LoginService(IRestService restService)
+        {
+            _restService = restService;
+        }
         public string BaseUrl { get; set; }
 
         /// <summary>
         /// Authenticate method
         /// </summary>
+        /// <param name="authToken">api endpoint</param>
         /// <param name="loginRequest"></param>
         /// <returns>New access token with its expiry and a refresh token</returns>
-        public async Task<LoginResult> Authenticate(LoginRequest loginRequest)
+        public async Task<LoginResult> Authenticate(LoginRequest loginRequest, string authToken = null)
         {
-            //login url
-            BaseUrl = "https://landleaserapi.azurewebsites.net/api/Authentication/login";
 
-            //Serialize the object
-            var loginRequestStr = JsonConvert.SerializeObject(loginRequest);
-
-            //Json string to content type conversion
-            var content = new StringContent(loginRequestStr, Encoding.UTF8, "application/json");
-
-            //Api call
-            var response = await Client.PostAsync(BaseUrl, content);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var loginResult = await response.Content.ReadFromJsonAsync<LoginResult>();
-                return loginResult;
-            }
-            else
-            {
-                return null;
-            }
-
+            string endpoint = "api/Authentication/login";
+            var response = await _restService.PostItemAsync<LoginRequest,LoginResult>(authToken, loginRequest, endpoint);
+            return response;
+            
         }
 
         /// <summary>
         /// Refresh token method
         /// </summary>
+        /// <param name="authToken">Bearer authentication token</param>
         /// <param name="tokenRequest">Access token and the refresh token</param>
         /// <returns>New access token with its expiry and it`s refresh token</returns>
-        public async Task<LoginResult> RefreshToken(TokenRequest tokenRequest)
+        public async Task<LoginResult> RefreshToken( TokenRequest tokenRequest, string authToken)
         {
-            //Refresh token url
-            BaseUrl = "https://landleaserapi.azurewebsites.net/api/Authentication/refreshToken";
-
-            //Serialize the token request
-            var tokenRequstStr = JsonConvert.SerializeObject(tokenRequest);
-
-            //Change from strig to content type
-            var content = new StringContent(tokenRequstStr, Encoding.UTF8, "application/json");
-
-            //Api call
-            var response = await Client.PostAsync(BaseUrl, content);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var loginResult = await response.Content.ReadFromJsonAsync<LoginResult>();
-                return loginResult;
-            }
-            else
-            {
-                return null;
-            }
+            string endpoint = "api/Authentication/refreshToken";
+            var response = await _restService.PostItemAsync<TokenRequest, LoginResult>(authToken, tokenRequest, endpoint);
+            return response;
         }
     }
 }
