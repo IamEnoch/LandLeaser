@@ -7,8 +7,8 @@
     xmlns:views="clr-namespace:LandLeaserApp.Views"
     Shell.FlyoutBehavior="Disabled"
     Shell.NavBarIsVisible="False">
-    
-   <TabBar>
+
+    <TabBar>
         <Tab
             Title="Explore"
             Icon="explore.png">

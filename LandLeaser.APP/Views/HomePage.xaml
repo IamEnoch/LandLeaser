@@ -24,20 +24,29 @@
                         Grid.Column="1">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:GetListingDto">
-                    <VerticalStackLayout>
+                    <VerticalStackLayout
+                        BackgroundColor="{StaticResource PrimaryLightColor2}"
+                        Margin="0,32,0,0">
                         <Image Source="{Binding Images[0].ImageUrl}"/>
                         <Label
                             Text="{Binding Cost}"
                             TextColor="{StaticResource Black}"
-                            Style="{StaticResource LabelMedium}"/>
+                            Style="{StaticResource LabelMedium}"
+                            Margin="13,20,0,0"/>
                         <Label
                             Text="{Binding Size}"
                             TextColor="{StaticResource Black}"
-                            Style="{StaticResource BodyMedium}"/>
-                        <Label
-                            Text="{Binding Location}"
-                            TextColor="{StaticResource Black}"
-                            Style="{StaticResource BodySmall}"/>
+                            Style="{StaticResource BodyMedium}"
+                            Margin="13,10,0,0"/>
+                        <HorizontalStackLayout
+                            Margin="10,13,0,11">
+                            <Image Source="location_icon.png"/>
+                            <Label
+                                Text="{Binding Location}"
+                                TextColor="{StaticResource Black}"
+                                Style="{StaticResource BodySmall}"
+                                Margin="8.84,0,0,0"/>
+                        </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
