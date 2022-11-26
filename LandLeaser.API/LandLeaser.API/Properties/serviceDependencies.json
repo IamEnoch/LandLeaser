@@ -5,8 +5,7 @@
     },
     "mssql1": {
       "type": "mssql",
-      "connectionId": "LandLeaserDBConnectionString",
-      "dynamicId": null
+      "connectionId": "DefaultConnection2"
     }
   }
 }

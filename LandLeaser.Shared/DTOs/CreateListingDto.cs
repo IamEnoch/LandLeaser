@@ -28,7 +28,7 @@ namespace LandLeaser.Shared.DTOs
         public string AppUserId { get; set; }
 
         [JsonPropertyName("images")]
-        public List<ListingImage> Images { get; set; }
+        public List<ListingImage>? Images { get; set; }
 
     }
 }

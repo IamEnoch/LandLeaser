@@ -19,35 +19,43 @@
             <RowDefinition Height="55"/>
         </Grid.RowDefinitions>
 
-        <CollectionView ItemsSource="{Binding Listing}"
-                        Grid.Row="1"
-                        Grid.Column="1">
+        <CollectionView ItemsSource="{Binding Listing}"                        
+                        Grid.RowSpan="3"
+                        Grid.Column="1"
+                        Margin="0,4,0,0">
+            
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:GetListingDto">
-                    <VerticalStackLayout
-                        BackgroundColor="{StaticResource PrimaryLightColor2}"
-                        Margin="0,32,0,0">
-                        <Image Source="{Binding Images[0].ImageUrl}"/>
-                        <Label
-                            Text="{Binding Cost}"
-                            TextColor="{StaticResource Black}"
-                            Style="{StaticResource LabelMedium}"
-                            Margin="13,20,0,0"/>
-                        <Label
-                            Text="{Binding Size}"
-                            TextColor="{StaticResource Black}"
-                            Style="{StaticResource BodyMedium}"
-                            Margin="13,10,0,0"/>
-                        <HorizontalStackLayout
-                            Margin="10,13,0,11">
-                            <Image Source="location_icon.png"/>
+                    <Frame
+                        Margin="0,16,0,16"
+                        CornerRadius="5"
+                        BorderColor="Black"
+                        Padding="0">
+                        <VerticalStackLayout
+                            BackgroundColor="{StaticResource PrimaryLightColor2}">
+                            <Image Source="{Binding Images[0].ImageUrl}"/>
                             <Label
-                                Text="{Binding Location}"
+                                Text="{Binding Cost}"
                                 TextColor="{StaticResource Black}"
-                                Style="{StaticResource BodySmall}"
-                                Margin="8.84,0,0,0"/>
-                        </HorizontalStackLayout>
-                    </VerticalStackLayout>
+                                Style="{StaticResource LabelMedium}"
+                                Margin="13,20,0,0"/>
+                            <Label
+                                Text="{Binding Size}"
+                                TextColor="{StaticResource Black}"
+                                Style="{StaticResource BodyMedium}"
+                                Margin="13,10,0,0"/>
+                            <HorizontalStackLayout
+                                Margin="10,13,0,11">
+                                <Image Source="location_icon.png"/>
+                                <Label
+                                    Text="{Binding Location}"
+                                    TextColor="{StaticResource Black}"
+                                    Style="{StaticResource BodySmall}"
+                                    Margin="8.84,0,0,0"/>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Frame>
+                    
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

@@ -1,12 +1,12 @@
 using LandLeaserApp.ViewModels;
 
-namespace LandLeaser.APP.Views;
+namespace LandLeaserApp.Views;
 
 public partial class LoadingPage : ContentPage
 {
 	public LoadingPage(LoadingPageViewModel loadingPageViewModel)
 	{
 		InitializeComponent();
-		BindingContext = loadingPageViewModel;
+        BindingContext = loadingPageViewModel;
 	}
 }
