@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LandLeaser.APP.Views.ProfileTabLogin"
+             xmlns:viewModels="clr-namespace:LandLeaser.APP.ViewModels"
+             x:DataType="viewModels:ProfileTabViewModel"
+             Shell.NavBarIsVisible="False"
+             Title="ProfileTabLogin">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="27"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="28"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="55"/>
+        </Grid.RowDefinitions>
+
+        <VerticalStackLayout
+            Grid.Column="1"
+            Grid.Row="1">
+            <Label 
+                Style="{StaticResource HeadlineLarge}"
+                Text="Your Profile"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" />
+            <Label 
+                Style="{StaticResource TitleLarge}"
+                Text="Login to finalize your lease"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" />
+            <Button
+                Text="Login"
+                Margin="0,50,0,0"
+                Command="{Binding GoToLoginCommand }"/>
+
+            <HorizontalStackLayout 
+                HorizontalOptions="Center"
+                Margin="0,24,0,0">
+                <Label Text="Don't have an account? "                   
+                       Style="{StaticResource LabelLarge}"/>
+
+                <ContentView >
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToLoginCommand}"/>
+                    </ContentView.GestureRecognizers>
+                    <Label Text="Register"
+                           Style="{StaticResource BodyLarge}"
+                           TextColor="{StaticResource PrimaryColor}"/>
+                </ContentView>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

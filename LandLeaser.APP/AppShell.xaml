@@ -3,33 +3,47 @@
     x:Class="LandLeaser.APP.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:LandLeaser.APP.Views"
-    xmlns:views="clr-namespace:LandLeaserApp.Views"
-    Shell.FlyoutBehavior="Disabled"
-    Shell.NavBarIsVisible="False">
+    xmlns:viewModels="clr-namespace:LandLeaser.APP.ViewModels"
+    xmlns:views="clr-namespace:LandLeaser.APP.Views"
+    x:DataType="viewModels:AppShellViewModel"
+    Shell.FlyoutBehavior="Disabled">
 
-    <TabBar>
+    <TabBar
+        IsVisible="{Binding IsBusy}">
         <Tab
             Title="Explore"
             Icon="explore.png">
             <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
         </Tab>
         <Tab
-            Title="wish list"
+            Title="Wish list"
             Icon="wishlist.png">
             <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
         </Tab>
         <Tab
+            Title="Leases"
+            Icon="leases.png">
+            <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
+        </Tab>
+        <Tab
             Title="Messages"
-            Icon="message.png">
+            Icon="chat.png">
             <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
 
         </Tab>
         <Tab
-            Title="Profile"
+            Title="{Binding Name}"
             Icon="profile.png">
-            <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
+            <ShellContent 
+                IsVisible="{Binding IsNotVisible}"
+                ContentTemplate="{DataTemplate views:ProfileTabLogin}"
+                Route="ProfileTabLogin"/>
+            <ShellContent 
+                IsVisible="{Binding IsVisible}"
+                ContentTemplate="{DataTemplate views:ProfileTabLoggedIn}"
+                Route="ProfileTabLoggedIn"/>
         </Tab>
     </TabBar>
+    
 
 </Shell>

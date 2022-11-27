@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LandLeaser.APP.Views.ProfileTabLoggedIn"
+             xmlns:viewModels="clr-namespace:LandLeaser.APP.ViewModels"
+             x:DataType="viewModels:ProfileTabViewModel"
+             Title="ProfileTabLoggedIn">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="35"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="35"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="24"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="55"/>
+        </Grid.RowDefinitions>
+
+        <VerticalStackLayout
+            Grid.Column="1"
+            Grid.Row="1">
+            <Label 
+                Text="Welcome to Profile Tab Logged in"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+            <Button
+                Text="Logout"
+                Margin="0,50,0,0"
+                Command="{Binding LogoutCommand}"/>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
