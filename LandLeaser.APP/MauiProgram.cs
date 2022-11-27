@@ -1,11 +1,7 @@
-﻿using LandLeaser.APP.ViewModels;
+﻿using LandLeaser.APP.Interfaces;
+using LandLeaser.APP.Services;
+using LandLeaser.APP.ViewModels;
 using LandLeaser.APP.Views;
-using LandLeaserApp.Helpers;
-using LandLeaserApp.Interfaces;
-using LandLeaserApp.Services;
-using LandLeaserApp.ViewModels;
-using LandLeaserApp.Views;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace LandLeaser.APP
 {
@@ -34,14 +30,17 @@ namespace LandLeaser.APP
             builder.Services.AddTransient<SignUpPage>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<HomePage>();
+            builder.Services.AddTransient<ProfileTabLoggedIn>();
+            builder.Services.AddTransient<ProfileTabLogin>();
 
             //ViewModel
+            builder.Services.AddTransient<ProfileTabViewModel>();
             builder.Services.AddTransient<HomePageViewModel>();
             builder.Services.AddSingleton<LoadingPageViewModel>();
             builder.Services.AddSingleton<SignUpViewModel>();
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<AppShellViewModel>();
-            builder.Services.AddSingleton<BaseViewModel>();
+            builder.Services.AddTransient<BaseViewModel>();
             
 
             return builder.Build();

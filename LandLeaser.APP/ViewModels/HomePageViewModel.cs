@@ -1,22 +1,17 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using LandLeaser.APP;
-using LandLeaser.APP.ViewModels;
-using LandLeaser.APP.Views;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
+using CommunityToolkit.Mvvm.Input;
+using LandLeaser.APP.Interfaces;
+using LandLeaser.APP.Views;
 using LandLeaser.Shared.DTOs;
-using LandLeaserApp.Interfaces;
-using LandLeaserApp.Services;
-using LandLeaserApp.Views;
 
-namespace LandLeaserApp.ViewModels
+namespace LandLeaser.APP.ViewModels
 {
     public partial class HomePageViewModel : BaseViewModel
     {
         public ObservableCollection<GetListingDto>? Listing { get; } = new();
         private readonly IListingService _listingService;
+
 
         public HomePageViewModel(IListingService listingService)
         {

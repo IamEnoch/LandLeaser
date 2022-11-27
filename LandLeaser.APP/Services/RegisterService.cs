@@ -1,13 +1,9 @@
-﻿using LandLeaser.Shared.Models;
-using LandLeaserApp.Interfaces;
+﻿using System.Text;
+using LandLeaser.APP.Interfaces;
+using LandLeaser.Shared.Models;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace LandLeaserApp.Services
+namespace LandLeaser.APP.Services
 {
     public class RegisterService : IRegisterService
     {

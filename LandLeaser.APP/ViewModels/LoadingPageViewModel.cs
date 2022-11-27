@@ -1,20 +1,10 @@
-﻿using LandLeaser.APP;
-using LandLeaser.APP.ViewModels;
+﻿using LandLeaser.APP.Helpers;
+using LandLeaser.APP.Interfaces;
 using LandLeaser.APP.Views;
-using LandLeaserApp.Interfaces;
 using LandLeaser.Shared.Models;
-using LandLeaserApp.Services;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LandLeaserApp.Helpers;
-using LandLeaserApp.Views;
 
-namespace LandLeaserApp.ViewModels
+namespace LandLeaser.APP.ViewModels
 {
     public partial class LoadingPageViewModel : BaseViewModel
     {

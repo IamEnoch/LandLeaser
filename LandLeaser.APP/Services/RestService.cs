@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
-using System.Threading.Tasks;
-using LandLeaser.Shared.DTOs;
-using LandLeaserApp.Interfaces;
+using LandLeaser.APP.Interfaces;
 using Newtonsoft.Json;
 
-namespace LandLeaserApp.Services
+namespace LandLeaser.APP.Services
 {
     public class RestService : IRestService
     {

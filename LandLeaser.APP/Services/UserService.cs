@@ -1,16 +1,10 @@
-﻿using LandLeaserApp.Interfaces;
+﻿using System.Net.Http.Headers;
+using LandLeaser.APP.Helpers;
+using LandLeaser.APP.Interfaces;
 using LandLeaser.Shared.Models;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net.Http.Headers;
-using LandLeaserApp.Helpers;
-using LandLeaser.APP;
 
-namespace LandLeaserApp.Services
+namespace LandLeaser.APP.Services
 {
     public class UserService : IUserService
     {

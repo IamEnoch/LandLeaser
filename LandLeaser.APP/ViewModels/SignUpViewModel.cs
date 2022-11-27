@@ -1,16 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using LandLeaser.APP.Interfaces;
 using LandLeaser.APP.Views;
 using LandLeaser.Shared.Models;
-using LandLeaserApp.Interfaces;
-using LandLeaserApp.Services;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LandLeaserApp.Views;
 
 namespace LandLeaser.APP.ViewModels
 {

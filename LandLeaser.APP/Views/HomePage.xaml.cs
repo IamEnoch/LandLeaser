@@ -1,6 +1,5 @@
-using LandLeaserApp.ViewModels;
-
-namespace LandLeaserApp.Views;
+using LandLeaser.APP.ViewModels;
+namespace LandLeaser.APP.Views;
 
 public partial class HomePage : ContentPage
 {

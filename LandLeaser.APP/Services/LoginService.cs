@@ -1,14 +1,7 @@
-﻿using LandLeaser.Shared.Models;
-using LandLeaserApp.Interfaces;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LandLeaser.APP.Interfaces;
+using LandLeaser.Shared.Models;
 
-namespace LandLeaserApp.Services
+namespace LandLeaser.APP.Services
 {
     public class LoginService : ILoginService
     {

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
-using LandLeaser.Shared.Models;
+﻿using System.Text.Json.Serialization;
+using LandLeaser.Shared.DTOs;
 
 namespace LandLeaser.Shared.DTOs
 {

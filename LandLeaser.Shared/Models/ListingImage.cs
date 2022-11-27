@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using System.Text.Json.Serialization;
-using LandLeaser.Shared.DTOs;
+﻿using System.Text.Json.Serialization;
 
 namespace LandLeaser.Shared.Models
 {

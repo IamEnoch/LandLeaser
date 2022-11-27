@@ -1,20 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using LandLeaser.Shared.Models;
-using LandLeaser.APP;
-using LandLeaser.APP.ViewModels;
+using LandLeaser.APP.Interfaces;
 using LandLeaser.APP.Views;
-using LandLeaserApp.Interfaces;
-using LandLeaserApp.Services;
+using LandLeaser.Shared.Models;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LandLeaserApp.Views;
 
-namespace LandLeaserApp.ViewModels
+namespace LandLeaser.APP.ViewModels
 {
     public partial class LoginViewModel : BaseViewModel
     {

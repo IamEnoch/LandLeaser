@@ -1,4 +1,5 @@
-﻿using LandLeaser.Shared.Models;
+﻿using LandLeaser.APP.ViewModels;
+using LandLeaser.Shared.Models;
 
 namespace LandLeaser.APP
 {
@@ -7,11 +8,13 @@ namespace LandLeaser.APP
         public static UserBasicInfo UserInfo { get; set; }
         public static string Token { get; set; }
         public static  string RefreshToken { get; set; }
-        public App()
+        private readonly AppShellViewModel _appShellViewModel;
+        public App(AppShellViewModel appShellViewModel)
         {
-            InitializeComponent();     
+            InitializeComponent();   
+            _appShellViewModel = appShellViewModel;
 
-            MainPage = new AppShell();
+            MainPage = new AppShell(_appShellViewModel);
         }
     }
 }
