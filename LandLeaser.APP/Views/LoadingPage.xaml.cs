@@ -1,6 +1,6 @@
-using LandLeaserApp.ViewModels;
+using LandLeaser.APP.ViewModels;
 
-namespace LandLeaserApp.Views;
+namespace LandLeaser.APP.Views;
 
 public partial class LoadingPage : ContentPage
 {

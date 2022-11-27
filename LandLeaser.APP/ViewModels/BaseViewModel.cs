@@ -1,9 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LandLeaser.APP.ViewModels
 {
@@ -16,6 +11,11 @@ namespace LandLeaser.APP.ViewModels
         [ObservableProperty]
         string title;
 
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(IsNotLoggedIn))]
+        bool isLoggedIn;
+
         bool IsNotBusy => !IsBusy;
+        bool IsNotLoggedIn => !IsLoggedIn;
     }
 }
