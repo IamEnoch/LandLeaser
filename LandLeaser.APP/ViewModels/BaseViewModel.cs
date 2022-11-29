@@ -10,7 +10,7 @@ namespace LandLeaser.APP.ViewModels
 
         [ObservableProperty]
         string title;
-
+        
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(IsNotLoggedIn))]
         bool isLoggedIn;

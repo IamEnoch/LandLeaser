@@ -11,7 +11,7 @@ namespace LandLeaser.APP.ViewModels
         {
             await Shell.Current.GoToAsync($"{nameof(LoginPage)}");
         }
-
+        
         [RelayCommand]
         public async Task LogoutAsync()
         {

@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using LandLeaser.APP.Helpers;
 using LandLeaser.APP.Interfaces;
 using LandLeaser.APP.Views;
 using LandLeaser.Shared.Models;
@@ -18,18 +19,118 @@ namespace LandLeaser.APP.ViewModels
         //Dependency injection of the login service
         private readonly ILoginService _loginService;
         private readonly IUserService _userService;
+        private readonly AppShellViewModel _appShellViewModel;
+        private readonly ProfileTabViewModel _profileTabViewModel;
+        private AppShell _appShell;
+        public string UserDetailsStr { get; set; }
+        public TokenValidateHelper TokenValidater = new TokenValidateHelper();
 
-        public LoginViewModel(ILoginService loginService, IUserService userService )
+        public event EventHandler StateChanged;
+
+        public LoginViewModel(ILoginService loginService, IUserService userService, AppShellViewModel appShellViewModel, ProfileTabViewModel profileTabViewModel, AppShell appShell)
         {
             Title = nameof(LoginPage);
             _loginService = loginService;
             _userService = userService;
+            _appShellViewModel = appShellViewModel;
+            _profileTabViewModel = profileTabViewModel;
+            _appShell = appShell;
         }
 
         [RelayCommand]
         public async Task DisplaySignUpPage()
         {
             await Shell.Current.GoToAsync($"///{nameof(SignUpPage)}");
+        }
+
+        /// <summary>
+        /// Method to check and validate stored credentials. Called in the AppShell page View model
+        /// </summary>
+        /// <returns></returns>
+        public async Task CheckAsync()
+        {
+            IsBusy = true;
+
+            var result = CheckUserLoginDetails();
+
+            if (result == true)
+            {
+                string accessToken = await SecureStorage.GetAsync(nameof(App.Token));
+                string refreshToken = await SecureStorage.GetAsync(nameof(App.RefreshToken));
+                var response = await ValidateAndRefreshAsync(accessToken, refreshToken, UserDetailsStr);
+
+                if (response == true)
+                {
+                    // Display profileLoggedInPage
+                    App.IsLoggedIn = true;
+                    await Shell.Current.GoToAsync($"///{nameof(AppShell)}");
+                }
+                else
+                {
+                    // Display profileLogInPage
+                    App.IsLoggedIn = false;
+                }
+
+                IsBusy = false;
+            }
+            else
+            {
+                // Display profileLogInPage
+                App.IsLoggedIn = false;
+            }
+        }
+        public bool CheckUserLoginDetails()
+        {
+            UserDetailsStr = Preferences.Get(nameof(App.UserInfo), "");
+
+
+            if (string.IsNullOrWhiteSpace(UserDetailsStr))
+                return false;
+
+            return true;
+        }
+
+        public async Task<bool> ValidateAndRefreshAsync(string accessToken, string refreshToken, string userDetailsStr)
+        {
+            //Validate the token
+            var validToken = await TokenValidater.ValidateToken(accessToken);
+            if (validToken != true)
+            {
+                var tokenRequest = new TokenRequest
+                {
+                    Token = accessToken,
+                    RefreshToken = refreshToken
+                };
+
+
+                //call refresh token method
+                var response = await _loginService.RefreshToken(tokenRequest);
+                if (response == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    //Update user preferences and securely store token
+                    await SecureStorage.SetAsync(nameof(App.Token), response.Token);
+                    await SecureStorage.SetAsync(nameof(App.RefreshToken), response.RefreshToken);
+
+                    App.Token = response.Token;
+                    App.RefreshToken = response.RefreshToken;
+
+                    return true;
+                }
+            }
+            else
+            {
+                var userInfo = JsonConvert.DeserializeObject<UserBasicInfo>(userDetailsStr);
+
+                App.UserInfo = userInfo;
+                App.Token = accessToken;
+                App.RefreshToken = refreshToken;
+
+                return true;
+            }
         }
 
         [RelayCommand]
@@ -68,23 +169,24 @@ namespace LandLeaser.APP.ViewModels
 
                     IsBusy = false;
 
-                    await AppShell.Current.DisplayAlert("Login", "Login was Successful!!!", "Ok");
-                    await Shell.Current.GoToAsync($"{nameof(HomePage)}");
+                    await Shell.Current.DisplayAlert("Login", "Login was Successful!!!", "Ok");
+                    Application.Current.MainPage = _appShell;
 
                 }
                 else
                 {
                     IsBusy = false;
-                    await AppShell.Current.DisplayAlert("Login", "Login was unsuccessful!!!", "Ok");
+                    await Shell.Current.DisplayAlert("Login", "Login was unsuccessful!!!", "Ok");
                 }
                 
             }
             else
             {
                 IsBusy = false;
-                await AppShell.Current.DisplayAlert("Error", "Enter all fields", "Ok");
+                await Shell.Current.DisplayAlert("Error", "Enter all fields", "Ok");
             }
-            
+            StateChanged?.Invoke(this, EventArgs.Empty);
+
         }
     }
 }

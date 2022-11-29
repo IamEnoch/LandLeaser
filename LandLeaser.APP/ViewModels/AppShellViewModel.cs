@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using LandLeaser.APP.Helpers;
 using LandLeaser.APP.Interfaces;
+using LandLeaser.APP.Views;
 using LandLeaser.Shared.Models;
 using Newtonsoft.Json;
 
@@ -11,7 +12,6 @@ namespace LandLeaser.APP.ViewModels
     {
         private readonly ILoginService _loginService;
         private readonly IUserService _userService;
-        public string Name { get; set; }
         public string UserDetailsStr { get; set; }
 
         [ObservableProperty]
@@ -25,8 +25,24 @@ namespace LandLeaser.APP.ViewModels
         {
             _loginService = loginService;
             _userService = userService;
+
+        }
+        //public event EventHandler StateChanged;
+
+        [RelayCommand]
+        public async Task GoToLoginAsync()
+        {
+            await Shell.Current.GoToAsync($"{nameof(LoginPage)}");
+
         }
 
+        [RelayCommand]
+        public async Task GoToLogoutAsync()
+        {
+            await Shell.Current.GoToAsync($"{nameof(LogoutPage)}");
+
+            //StateChanged?.Invoke(this, EventArgs.Empty);
+        }
         /// <summary>
         /// Method to check and validate stored credentials. Called in the AppShell page View model
         /// </summary>
@@ -47,13 +63,13 @@ namespace LandLeaser.APP.ViewModels
                 {
                     // Display profileLoggedInPage
                     IsVisible = true;
-                    Name = "Profile";
+                    Title = "Profile";
                 }
                 else
                 {
                     // Display profileLogInPage
                     IsVisible = false;
-                    Name = "Login";
+                    Title = "Login";
                 }
 
                 IsBusy = false;
@@ -93,7 +109,6 @@ namespace LandLeaser.APP.ViewModels
                 var response = await _loginService.RefreshToken(tokenRequest);
                 if (response == null)
                 {
-                    await Shell.Current.DisplayAlert("Fail", "Refreshing token unsuccessful", "ok");
                     return false;
                 }
                 else
@@ -104,8 +119,7 @@ namespace LandLeaser.APP.ViewModels
 
                     App.Token = response.Token;
                     App.RefreshToken = response.RefreshToken;
-
-                    await Shell.Current.DisplayAlert("Success", "No login required", "ok");
+                    
                     return true;
                 }
             }
@@ -116,8 +130,7 @@ namespace LandLeaser.APP.ViewModels
                 App.UserInfo = userInfo;
                 App.Token = accessToken;
                 App.RefreshToken = refreshToken;
-
-                await Shell.Current.DisplayAlert("Success", "No login required", "ok");
+                
                 return true;
             }
         }
