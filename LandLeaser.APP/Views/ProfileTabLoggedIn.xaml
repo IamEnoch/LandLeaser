@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LandLeaser.APP.Views.ProfileTabLoggedIn"
              xmlns:viewModels="clr-namespace:LandLeaser.APP.ViewModels"
-             x:DataType="viewModels:ProfileTabViewModel"
+             x:DataType="viewModels:AppShellViewModel"
              Title="ProfileTabLoggedIn">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -28,7 +28,7 @@
             <Button
                 Text="Logout"
                 Margin="0,50,0,0"
-                Command="{Binding LogoutCommand}"/>
+                Command="{Binding GoToLogoutCommand}"/>
         </VerticalStackLayout>
     </Grid>
 </ContentPage>

@@ -7,23 +7,41 @@ namespace LandLeaser.APP
 {
     public partial class AppShell : Shell
     {
-        public AppShell(AppShellViewModel appShellViewModel)
+        private AppShellViewModel _appShellViewModel;
+        private ProfileTabViewModel _profileTabViewModel;
+        //private AppShell _appShell;
+
+        public AppShell(AppShellViewModel appShellViewModel, ProfileTabViewModel profileTabViewModel)
         {
             InitializeComponent();
-            BindingContext = appShellViewModel;
+            _appShellViewModel = appShellViewModel;
+            _profileTabViewModel = profileTabViewModel;
+
+            BindingContext = _appShellViewModel;
 
             //Explicit route registration
+            Routing.RegisterRoute(nameof(LogoutPage), typeof(LogoutPage));
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
             Routing.RegisterRoute(nameof(SignUpPage), typeof(SignUpPage));
             Routing.RegisterRoute(nameof(ProfileTabLogin), typeof(ProfileTabLogin));
 
-
+            //_appShellViewModel.StateChanged += StateChanged;
         }
-        protected override void OnAppearing()
+        
+        /*void StateChanged(object sender, EventArgs e)
         {
-            if(BindingContext is AppShellViewModel appShellViewModel) 
+            void Check(AppShell appShell)
             {
-                appShellViewModel.CheckAsync();
+                _appShell = appShell;
+            }
+
+            App.Current.MainPage = _appShell;
+        }*/
+        protected override async void OnAppearing()
+        {
+            if(BindingContext is AppShellViewModel) 
+            {
+                await _appShellViewModel.CheckAsync();
             }
             base.OnAppearing();
 

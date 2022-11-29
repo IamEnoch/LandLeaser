@@ -26,7 +26,9 @@ namespace LandLeaser.APP
             builder.Services.AddSingleton<IRestService, RestService>();
 
             //Views
-            builder.Services.AddSingleton<LoadingPage>();
+            builder.Services.AddTransient<LogoutPage>();
+            builder.Services.AddTransient<AppShell>();
+            builder.Services.AddTransient<LoadingPage>();
             builder.Services.AddTransient<SignUpPage>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<HomePage>();
@@ -34,10 +36,11 @@ namespace LandLeaser.APP
             builder.Services.AddTransient<ProfileTabLogin>();
 
             //ViewModel
+            builder.Services.AddTransient<LogoutViewModel>();
             builder.Services.AddTransient<ProfileTabViewModel>();
             builder.Services.AddTransient<HomePageViewModel>();
-            builder.Services.AddSingleton<LoadingPageViewModel>();
-            builder.Services.AddSingleton<SignUpViewModel>();
+            builder.Services.AddTransient<LoadingPageViewModel>();
+            builder.Services.AddTransient<SignUpViewModel>();
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<AppShellViewModel>();
             builder.Services.AddTransient<BaseViewModel>();

@@ -4,9 +4,9 @@ namespace LandLeaser.APP.Views;
 
 public partial class ProfileTabLoggedIn : ContentPage
 {
-	public ProfileTabLoggedIn(ProfileTabViewModel profileTabViewModel)
+	public ProfileTabLoggedIn(AppShellViewModel appShellViewModel)
 	{
 		InitializeComponent();
-        BindingContext = profileTabViewModel;
+        BindingContext = appShellViewModel;
     }
 }

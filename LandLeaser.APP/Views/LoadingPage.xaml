@@ -5,7 +5,7 @@
              xmlns:viewModels="clr-namespace:LandLeaser.APP.ViewModels"
              x:DataType="viewModels:LoadingPageViewModel"
              Title="LoadingPage">
-    <VerticalStackLayout>
+    <VerticalStackLayout>        
         <Label 
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
