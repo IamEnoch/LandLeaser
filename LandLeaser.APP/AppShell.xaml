@@ -6,10 +6,9 @@
     xmlns:viewModels="clr-namespace:LandLeaser.APP.ViewModels"
     xmlns:views="clr-namespace:LandLeaser.APP.Views"
     x:DataType="viewModels:AppShellViewModel"
-    Shell.FlyoutBehavior="Disabled">
+    FlyoutBehavior="Disabled">
 
     <TabBar
-        Route="AppShell"
         IsVisible="{Binding IsBusy}">
         <Tab
             Title="Explore"
@@ -46,5 +45,4 @@
                 Route="ProfileTabLoggedIn"/>
         </Tab>
     </TabBar>
-
 </Shell>

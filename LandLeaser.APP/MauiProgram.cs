@@ -28,7 +28,6 @@ namespace LandLeaser.APP
             //Views
             builder.Services.AddTransient<LogoutPage>();
             builder.Services.AddTransient<AppShell>();
-            builder.Services.AddTransient<LoadingPage>();
             builder.Services.AddTransient<SignUpPage>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<HomePage>();
@@ -39,7 +38,6 @@ namespace LandLeaser.APP
             builder.Services.AddTransient<LogoutViewModel>();
             builder.Services.AddTransient<ProfileTabViewModel>();
             builder.Services.AddTransient<HomePageViewModel>();
-            builder.Services.AddTransient<LoadingPageViewModel>();
             builder.Services.AddTransient<SignUpViewModel>();
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<AppShellViewModel>();

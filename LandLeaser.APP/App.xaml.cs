@@ -9,17 +9,13 @@ namespace LandLeaser.APP
         public static bool IsLoggedIn { get; set; }
         public static string Token { get; set; }
         public static  string RefreshToken { get; set; }
-        private readonly AppShellViewModel _appShellViewModel;
-        private readonly ProfileTabViewModel _profileTabViewModel;
-        public App(AppShellViewModel appShellViewModel, ProfileTabViewModel profileTabViewModel)
-        {
-            InitializeComponent();   
-            _appShellViewModel = appShellViewModel;
-            _profileTabViewModel = profileTabViewModel;
-
-            MainPage = new AppShell(appShellViewModel, profileTabViewModel);
-        }
-
         
+
+        public App(AppShell appShell)
+        {
+            InitializeComponent();
+
+            MainPage = appShell;
+        }
     }
 }
