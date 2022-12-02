@@ -11,15 +11,5 @@ public partial class LoginPage : ContentPage
 		BindingContext = loginViewModel;
         _loginViewModel = loginViewModel;
 
-
-	}
-    protected override async void OnAppearing()
-    {
-        if (BindingContext is LoginViewModel)
-        {
-            await _loginViewModel.CheckAsync();
-        }
-        base.OnAppearing();
-
     }
 }

@@ -19,11 +19,13 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="55"/>
         </Grid.RowDefinitions>
-
-        <CollectionView ItemsSource="{Binding Listing}"                        
-                        Grid.RowSpan="3"
-                        Grid.Column="1"
-                        Margin="0,4,0,0">
+        
+        <CollectionView 
+            Grid.Row="1"
+            ItemsSource="{Binding Listing}"                        
+            Grid.RowSpan="3"
+            Grid.Column="1"
+            Margin="0,4,0,0">
             
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="dtOs:GetListingDto">
@@ -60,6 +62,14 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
+        <ImageButton
+            HorizontalOptions="End"
+            VerticalOptions="End"
+            Grid.Row="1"
+            Grid.Column="1"
+            Source="addfab.png"
+            IsVisible="{Binding IsLoggedIn}"/>
         
     </Grid>
 </ContentPage>
