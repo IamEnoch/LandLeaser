@@ -6,14 +6,14 @@ namespace LandLeaser.APP.ViewModels
     {
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(IsNotBusy))]
-        bool isBusy;
+        bool _isBusy;
 
         [ObservableProperty]
-        string title;
+        string _title;
         
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(IsNotLoggedIn))]
-        bool isLoggedIn;
+        bool _isLoggedIn;
 
         bool IsNotBusy => !IsBusy;
         bool IsNotLoggedIn => !IsLoggedIn;

@@ -36,7 +36,13 @@ namespace LandLeaser.APP.ViewModels
             _registerService = registerService;
             _userService = userService;
             _loginService = loginService;
-        }       
+        }
+
+        [RelayCommand]
+        public async Task DisplayLoginPage()
+        {
+            await Shell.Current.GoToAsync($"{nameof(LoginPage)}", true);
+        }
 
         [RelayCommand]
         async Task Register()
@@ -84,14 +90,14 @@ namespace LandLeaser.APP.ViewModels
 
                         IsBusy = false; ;
 
-                        await AppShell.Current.DisplayAlert("Register", "Registration was Successfull!!!", "Ok");
+                        await Shell.Current.DisplayAlert("Register", "Registration was Successfull!!!", "Ok");
                         await Shell.Current.GoToAsync($"///{nameof(HomePage)}");
                     }
                     //Login after registration unsuccessful
                     else
                     {
                         IsBusy = false;
-                        await AppShell.Current.DisplayAlert("Register", "Registration was successfull login unsuccessfull!!!", "Ok");
+                        await Shell.Current.DisplayAlert("Register", "Registration was successfull login unsuccessfull!!!", "Ok");
                     }
                 }
 
@@ -99,14 +105,14 @@ namespace LandLeaser.APP.ViewModels
                 else
                 {
                     IsBusy = false;
-                    await AppShell.Current.DisplayAlert("Register", "Registration was unsuccessfull!!!", "Ok");
+                    await Shell.Current.DisplayAlert("Register", "Registration was unsuccessfull!!!", "Ok");
                 }
 
             }
             else
             {
                 IsBusy = false;
-                await AppShell.Current.DisplayAlert("Error", "Enter all fields", "Ok");
+                await Shell.Current.DisplayAlert("Error", "Enter all fields", "Ok");
             }
 
         }

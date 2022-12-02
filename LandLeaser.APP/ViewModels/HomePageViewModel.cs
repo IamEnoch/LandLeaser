@@ -17,11 +17,11 @@ namespace LandLeaser.APP.ViewModels
         {
             Title = nameof(HomePage);
             _listingService = listingService;
-            GetItems();
         }
-        
 
-        async Task GetItems()
+        public async Task IsLoggedInState() => await Task.FromResult(IsLoggedIn = App.IsLoggedIn);
+
+        public async Task GetItemsAsync()
         {
             if(IsBusy)
                 return;

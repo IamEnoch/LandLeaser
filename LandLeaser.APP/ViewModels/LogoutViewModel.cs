@@ -9,7 +9,7 @@ namespace LandLeaser.APP.ViewModels
 {
     public partial class LogoutViewModel : BaseViewModel
     {
-        private AppShell _appShell;
+        private readonly AppShell _appShell;
         public LogoutViewModel(AppShell appShell)
         {
             _appShell = appShell;
@@ -22,8 +22,7 @@ namespace LandLeaser.APP.ViewModels
             SecureStorage.RemoveAll();
 
             App.Current.MainPage = _appShell;
-
-            //StateChanged?.Invoke(this, EventArgs.Empty);
+            
         }
     }
 }
