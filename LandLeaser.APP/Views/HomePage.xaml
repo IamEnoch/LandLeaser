@@ -20,14 +20,16 @@
             <RowDefinition Height="55"/>
         </Grid.RowDefinitions>
         
-        <CollectionView 
+
+
+            <CollectionView 
             Grid.Row="1"
             ItemsSource="{Binding Listing}"                        
-            Grid.RowSpan="3"
+            Grid.RowSpan="2"
             Grid.Column="1"
             Margin="0,4,0,0">
             
-            <CollectionView.ItemTemplate>
+                <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="dtOs:GetListingDto">
                     <Frame
                         Margin="0,16,0,16"
@@ -69,7 +71,9 @@
             Grid.Row="1"
             Grid.Column="1"
             Source="addfab.png"
-            IsVisible="{Binding IsLoggedIn}"/>
+            IsVisible="{Binding IsLoggedIn}"
+            Command="{Binding AddListingCommand}"/>
+
         
     </Grid>
 </ContentPage>

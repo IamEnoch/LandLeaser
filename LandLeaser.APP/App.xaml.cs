@@ -1,5 +1,4 @@
-﻿using LandLeaser.APP.ViewModels;
-using LandLeaser.Shared.Models;
+﻿using LandLeaser.Shared.Models;
 
 namespace LandLeaser.APP
 {

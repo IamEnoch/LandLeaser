@@ -13,12 +13,14 @@
         <Tab
             Title="Explore"
             Icon="explore.png">
-            <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
+            <ShellContent 
+                ContentTemplate="{DataTemplate views:HomePage}"/>
         </Tab>
         <Tab
             Title="Wish list"
             Icon="wishlist.png">
-            <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
+            <ShellContent
+                ContentTemplate="{DataTemplate views:HomePage}"/>
         </Tab>
         <Tab
             Title="Leases"
@@ -32,17 +34,14 @@
 
         </Tab>
         <Tab
-            Route="Profile"
             Title="{Binding Title, Mode=OneWay}"
             Icon="profile.png">
             <ShellContent 
-                IsVisible="{Binding IsNotVisible}"
-                ContentTemplate="{DataTemplate views:ProfileTabLogin}"
-                Route="ProfileTabLogin"/>
+                IsVisible="{Binding IsNotLoggedIn}"
+                ContentTemplate="{DataTemplate views:ProfileTabLogin}"/>
             <ShellContent 
-                IsVisible="{Binding IsVisible}"
-                ContentTemplate="{DataTemplate views:ProfileTabLoggedIn}"
-                Route="ProfileTabLoggedIn"/>
+                IsVisible="{Binding IsLoggedIn}"
+                ContentTemplate="{DataTemplate views:ProfileTabLoggedIn}"/>
         </Tab>
     </TabBar>
 </Shell>

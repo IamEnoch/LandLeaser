@@ -11,13 +11,13 @@ public partial class HomePage : ContentPage
 		BindingContext = homePageViewModel;
         _homePageViewModel = homePageViewModel;
         _appShellViewModel = appShellViewModel;
-        
+        _homePageViewModel.IsLoggedInState();
     }
 
     protected override async void OnAppearing()
     {
-        //await _appShellViewModel.CheckAsync();
-        await _homePageViewModel.IsLoggedInState();
+        await _appShellViewModel.CheckAsync();
+        _homePageViewModel.IsLoggedInState();
         await _homePageViewModel.GetItemsAsync();
         base.OnAppearing();
     }

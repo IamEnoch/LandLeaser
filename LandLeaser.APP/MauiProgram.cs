@@ -2,6 +2,7 @@
 using LandLeaser.APP.Services;
 using LandLeaser.APP.ViewModels;
 using LandLeaser.APP.Views;
+using Syncfusion.Maui.Core.Hosting;
 
 namespace LandLeaser.APP
 {
@@ -10,7 +11,9 @@ namespace LandLeaser.APP
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
-            builder.UseMauiApp<App>().ConfigureFonts(fonts =>
+            builder.UseMauiApp<App>()
+                .ConfigureSyncfusionCore()
+                .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
@@ -26,18 +29,20 @@ namespace LandLeaser.APP
             builder.Services.AddSingleton<IRestService, RestService>();
 
             //Views
+            builder.Services.AddTransient<AddListingPage>();
             builder.Services.AddTransient<LogoutPage>();
             builder.Services.AddTransient<AppShell>();
             builder.Services.AddTransient<SignUpPage>();
             builder.Services.AddTransient<LoginPage>();
-            builder.Services.AddTransient<HomePage>();
+            builder.Services.AddSingleton<HomePage>();
             builder.Services.AddTransient<ProfileTabLoggedIn>();
             builder.Services.AddTransient<ProfileTabLogin>();
 
             //ViewModel
+            builder.Services.AddTransient<AddListingViewModel>();
             builder.Services.AddTransient<LogoutViewModel>();
             builder.Services.AddTransient<ProfileTabViewModel>();
-            builder.Services.AddTransient<HomePageViewModel>();
+            builder.Services.AddSingleton<HomePageViewModel>();
             builder.Services.AddTransient<SignUpViewModel>();
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<AppShellViewModel>();

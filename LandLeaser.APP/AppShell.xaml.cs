@@ -17,20 +17,22 @@ namespace LandLeaser.APP
             BindingContext = _appShellViewModel;
 
             //Explicit route registration
+            Routing.RegisterRoute(nameof(NewPage), typeof(NewPage));
             Routing.RegisterRoute(nameof(LogoutPage), typeof(LogoutPage));
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
             Routing.RegisterRoute(nameof(SignUpPage), typeof(SignUpPage));
-            Routing.RegisterRoute(nameof(ProfileTabLogin), typeof(ProfileTabLogin));
+            Routing.RegisterRoute(nameof(AddListingPage), typeof(AddListingPage));
             
         }
         protected override async void OnAppearing()
         {
-
-            if(BindingContext is AppShellViewModel)
-            {
-                _appShellViewModel.CheckAsync();
-                await _appShellViewModel.TabStateAsync();
-            }
+            await _appShellViewModel.CheckAsync();
+            await _appShellViewModel.TabState();
+            /*f(BindingContext is AppShellViewModel)
+            { 
+                await _appShellViewModel.CheckAsync();
+                _appShellViewModel.TabState();
+            }*/
             base.OnAppearing();
 
         }
