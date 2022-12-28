@@ -19,8 +19,12 @@ namespace LandLeaser.APP.ViewModels
             _listingService = listingService;
         }
 
-        public async Task IsLoggedInState() => await Task.FromResult(IsLoggedIn = App.IsLoggedIn);
+        public void IsLoggedInState() => IsLoggedIn = App.IsLoggedIn;
 
+        /// <summary>
+        /// Get a list of listings by making an api call
+        /// </summary>
+        /// <returns></returns>
         public async Task GetItemsAsync()
         {
             if(IsBusy)
@@ -64,6 +68,7 @@ namespace LandLeaser.APP.ViewModels
                 IsBusy = false;
             }
         }
+
         /// <summary>
         /// Sign out command
         /// </summary>
@@ -78,7 +83,13 @@ namespace LandLeaser.APP.ViewModels
 
             IsBusy = false;
 
-            await Shell.Current.GoToAsync($"///{nameof(LoginPage)}");
+            await Shell.Current.GoToAsync($"{nameof(LoginPage)}");
+        }
+
+        [RelayCommand]
+        public async Task AddListingAsync()
+        {
+            await Shell.Current.GoToAsync($"{nameof(AddListingPage)}");
         }
     }
 }

@@ -15,12 +15,6 @@ namespace LandLeaser.APP.ViewModels
         //private readonly AppShell _appShell;
         public string UserDetailsStr { get; set; }
 
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(IsNotVisible))]
-        bool _isVisible;
-
-        public bool IsNotVisible => !IsVisible;
-
         public TokenValidateHelper TokenValidater = new TokenValidateHelper();
         public AppShellViewModel(ILoginService loginService, IUserService userService)
         {
@@ -29,6 +23,10 @@ namespace LandLeaser.APP.ViewModels
 
         }
 
+        /// <summary>
+        /// Navigate to login page
+        /// </summary>
+        /// <returns></returns>
         [RelayCommand]
         public async Task GoToLoginAsync()
         {
@@ -36,6 +34,10 @@ namespace LandLeaser.APP.ViewModels
 
         }
 
+        /// <summary>
+        /// Navigate to logout page
+        /// </summary>
+        /// <returns></returns>
         [RelayCommand]
         public async Task GoToLogoutAsync()
         {
@@ -52,20 +54,13 @@ namespace LandLeaser.APP.ViewModels
         }
 
         /// <summary>
-        /// Gets the correct tab bar state
-        /// </summary>
-        /// <returns></returns>
-        public async Task TabStateAsync() =>
-            await Task.FromResult(App.IsLoggedIn ? Title = "Profile" : Title = "Login");
-
-        /// <summary>
         /// Method to check and validate stored credentials. Called in the AppShell page View model
         /// </summary>
         /// <returns></returns>
         public async Task CheckAsync()
         {
             IsBusy = true;
-            
+
             var result = await CheckUserLoginDetailsAsync();
 
             if (result)
@@ -79,15 +74,13 @@ namespace LandLeaser.APP.ViewModels
                     // Display profileLoggedInPage
                     IsLoggedIn = true;
                     App.IsLoggedIn = true;
-                    IsVisible = true;
                 }
                 else
                 {
                     // Display profileLogInPage
                     IsLoggedIn = false;
                     App.IsLoggedIn = false;
-                    IsVisible = false;
-                    
+
                 }
                 IsBusy = false;
             }
@@ -96,10 +89,21 @@ namespace LandLeaser.APP.ViewModels
                 // Display profileLogInPage
                 IsLoggedIn = false;
                 App.IsLoggedIn = false;
-                IsVisible = false;
             }
             IsBusy = false;
         }
+
+        /// <summary>
+        /// Gets the correct tab bar state
+        /// </summary>
+        /// <returns></returns>
+        public Task TabState() => Task.FromResult(Task.FromResult(Title = App.IsLoggedIn ? "Profile" : "Login"));
+
+
+        /// <summary>
+        /// Check user login details
+        /// </summary>
+        /// <returns>Bool: Yes if stores preferences are found and No of not</returns>
         public async Task<bool> CheckUserLoginDetailsAsync()
         {
             UserDetailsStr = Preferences.Get(nameof(App.UserInfo), "");
@@ -111,6 +115,13 @@ namespace LandLeaser.APP.ViewModels
             return await Task.FromResult(true);
         }
 
+        /// <summary>
+        /// Validates token and refreshes if necessary
+        /// </summary>
+        /// <param name="accessToken">Access token</param>
+        /// <param name="refreshToken">Refresh token</param>
+        /// <param name="userDetailsStr">User details</param>
+        /// <returns></returns>
         public async Task<bool> ValidateAndRefreshAsync(string accessToken, string refreshToken, string userDetailsStr)
         {
             //Validate the token

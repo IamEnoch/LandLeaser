@@ -15,7 +15,7 @@ namespace LandLeaser.APP.ViewModels
         [NotifyPropertyChangedFor(nameof(IsNotLoggedIn))]
         bool _isLoggedIn;
 
-        bool IsNotBusy => !IsBusy;
-        bool IsNotLoggedIn => !IsLoggedIn;
+        public bool IsNotBusy => !IsBusy;
+        public bool IsNotLoggedIn => !IsLoggedIn;
     }
 }
