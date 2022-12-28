@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LandLeaser.APP.Views.AddListingPage"
+             xmlns:viewModels="clr-namespace:LandLeaser.APP.ViewModels"
+             x:DataType="viewModels:AddListingViewModel"
+             xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             Title="Add Listing">
+    
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="35"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="35"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="24"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <VerticalStackLayout Grid.Column="1"
+                             Grid.Row="1">
+
+            <inputLayout:SfTextInputLayout
+                ContainerType="None"
+                Hint="Land Location">
+                <Entry
+                    Style="{StaticResource EntryLL}"
+                    Text="{Binding LandLocation}"
+                    Margin="0,30,0,0"/>
+            </inputLayout:SfTextInputLayout>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <inputLayout:SfTextInputLayout                     
+                    Grid.Column="0"
+                    ContainerType="None"
+                    Hint="Land Size"
+                    Margin="0,0,68.5,0">
+                    <Entry
+                        Style="{StaticResource EntryLL}"
+                        Text="{Binding LandSize}"
+                        />
+                </inputLayout:SfTextInputLayout>
+                <inputLayout:SfTextInputLayout
+                    Grid.Column="2"
+                    ContainerType="None"
+                    Hint="Acres">
+                    <Entry                        
+                        Style="{StaticResource EntryLL}"
+                        Text="{Binding SizeMetric}"
+                        />
+                </inputLayout:SfTextInputLayout>
+            </Grid>
+
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <inputLayout:SfTextInputLayout
+                    Grid.Column="0"
+                    ContainerType="None"
+                    Hint="Land Cost"
+                    Margin="0,0,68.5,0">
+                    <Entry
+                        Style="{StaticResource EntryLL}"
+                        Text="{Binding LandCost}"
+                        />
+                </inputLayout:SfTextInputLayout>
+
+                <inputLayout:SfTextInputLayout
+                    Grid.Column="1"
+                    ContainerType="None"
+                    Hint="KES">
+                    <Entry
+                        Style="{StaticResource EntryLL}"
+                        Text="{Binding Currency}"/>
+                </inputLayout:SfTextInputLayout>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <inputLayout:SfTextInputLayout
+                    Grid.Column="0"
+                    ContainerType="None"
+                    Hint="Lease Duration"
+                    Margin="0,0,68.5,0">
+                    <Entry
+                        Style="{StaticResource EntryLL}"
+                        Text="{Binding LeaseDuration}"/>
+                </inputLayout:SfTextInputLayout>
+
+                <inputLayout:SfTextInputLayout
+                    Grid.Column="1"
+                    ContainerType="None"
+                    Hint="Years">
+                    <Entry
+                        Style="{StaticResource EntryLL}"
+                        Text="{Binding DurationMetric}"/>
+                </inputLayout:SfTextInputLayout>
+            </Grid>
+
+            <inputLayout:SfTextInputLayout
+                ContainerType="None"
+                Hint="Description">
+                <Entry
+                    Style="{StaticResource EntryLL}"
+                    Text="{Binding Description}"
+                    Margin="0,35,0,0"/>
+            </inputLayout:SfTextInputLayout>
+
+            <inputLayout:SfTextInputLayout
+                ContainerType="None"
+                Hint="Preferred Crop">
+                <Entry
+                    Style="{StaticResource EntryLL}"
+                    Text="{Binding PreferredCrop}"
+                    Margin="0,35,0,0"/>
+            </inputLayout:SfTextInputLayout>
+
+            <HorizontalStackLayout
+                Grid.Column="1"
+                Margin="19.7,30,0,0">
+                <Label
+                    Margin="0,3,100,0"
+                    Text="Select Images"
+                    TextColor="{StaticResource PrimaryColor}"
+                    Style="{StaticResource TitleLarge}"
+                    />
+                
+                <ImageButton
+                    Source="upload_icon.png"/>
+            </HorizontalStackLayout>
+
+            
+            
+            <Button
+                Text="Submit"
+                Margin="0,50,0,0"/>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
