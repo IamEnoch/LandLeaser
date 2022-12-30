@@ -11,6 +11,7 @@ namespace LandLeaser.APP
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
+
             builder.UseMauiApp<App>()
                 .ConfigureSyncfusionCore()
                 .ConfigureFonts(fonts =>

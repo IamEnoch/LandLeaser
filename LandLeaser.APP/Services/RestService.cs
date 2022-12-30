@@ -49,7 +49,7 @@ namespace LandLeaser.APP.Services
         /// <summary>
         /// Get action to get an item
         /// </summary>
-        /// <typeparam name="T">Generic item</typeparam>
+        /// <typeparam name="T">Generic item(expected item)</typeparam>
         /// <param name="authToken">Bearer authentication token</param>
         /// <param name="id">Item id</param>
         /// <param name="endpoint">api endpoint</param>
@@ -58,7 +58,7 @@ namespace LandLeaser.APP.Services
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
             
-            T item = default;
+            T item = default(T);
 
             try
             {

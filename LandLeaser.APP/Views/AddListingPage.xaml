@@ -49,7 +49,7 @@
                         />
                 </inputLayout:SfTextInputLayout>
                 <inputLayout:SfTextInputLayout
-                    Grid.Column="2"
+                    Grid.Column="1"
                     ContainerType="None"
                     Hint="Acres">
                     <Entry                        
@@ -143,11 +143,10 @@
                     Source="upload_icon.png"/>
             </HorizontalStackLayout>
 
-            
-            
             <Button
                 Text="Submit"
-                Margin="0,50,0,0"/>
+                Margin="0,50,0,0"
+                Command="{Binding SubmitListingCommand}"/>
         </VerticalStackLayout>
     </Grid>
 </ContentPage>
