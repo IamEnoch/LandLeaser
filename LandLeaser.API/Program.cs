@@ -1,5 +1,4 @@
 using LandLeaser.API.Data;
-using LandLeaser.API.Data.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -8,11 +7,18 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Text;
+using AutoMapper;
+using LandLeaser.API.Mapping;
+using LandLeaser.Shared.Models;
+using LandLeaser.API.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+//Automapper configuration
+builder.Services.AddAutoMapper(typeof(Program));
 
 //Configure DbContext with sql
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
