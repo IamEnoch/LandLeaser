@@ -22,10 +22,10 @@ namespace LandLeaser.Shared.DTOs
         public string Description { get; set; }
 
         [JsonPropertyName("appUserId")]
-        public string AppUserId { get; set; }
+        public Guid AppUserId { get; set; }
 
         [JsonPropertyName("images")]
-        public List<ListingImage>? Images { get; set; }
+        public IList<ListingImageDto> Images { get; set; }
 
     }
 }

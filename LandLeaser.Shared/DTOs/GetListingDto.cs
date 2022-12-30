@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-using LandLeaser.Shared.DTOs;
 
 namespace LandLeaser.Shared.DTOs
 {
