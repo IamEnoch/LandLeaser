@@ -33,9 +33,25 @@ namespace LandLeaser.APP.Services
         /// <returns></returns>
         public async Task<GetListingDto> GetListingAsync(string authToken, string id)
         {
-            string endpoint = $"api/listing/{id}";
+            string endpoint = $"api/listings/{id}";
 
             var response = await _restService.GetItemAsync<GetListingDto>(authToken, id, endpoint);
+
+            return response;
+        }
+
+        /// <summary>
+        /// Method to post a listing
+        /// </summary>
+        /// <param name="authToken">Bearer authentication token</param>
+        /// <param name="createListing">Listing to be created</param>
+        /// <returns></returns>
+        public async Task<GetListingDto> PostListingAsync(string authToken, CreateListingDto createListing)
+        {
+            string endpoint = "api/listings";
+
+            var response =
+                await _restService.PostItemAsync<CreateListingDto, GetListingDto>(authToken, createListing, endpoint);
 
             return response;
         }
