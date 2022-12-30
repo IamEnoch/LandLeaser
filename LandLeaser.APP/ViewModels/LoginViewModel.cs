@@ -60,13 +60,14 @@ namespace LandLeaser.APP.ViewModels
                     }
 
                     //Desired information to be stored
-                    var userDetails = await _userService.GetUser(Email, response.Token);
+                    var userDetails = await _userService.GetUser(Email, response.LoginResult.Token);
                     var userInfoStr = JsonConvert.SerializeObject(userDetails);
 
                     //Add user preferences and securely store token
                     Preferences.Set(nameof(App.UserInfo), userInfoStr);
-                    await SecureStorage.SetAsync(nameof(App.Token), response.Token);
-                    await SecureStorage.SetAsync(nameof(App.RefreshToken), response.RefreshToken);
+                    await SecureStorage.SetAsync(nameof(App.Token), response.LoginResult.Token);
+                    await SecureStorage.SetAsync(nameof(App.RefreshToken), response.LoginResult.RefreshToken);
+                    await SecureStorage.SetAsync("userId", response.User.Id);
 
                     IsBusy = false;
                     
