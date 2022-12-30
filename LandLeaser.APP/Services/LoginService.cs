@@ -1,4 +1,5 @@
 ﻿using LandLeaser.APP.Interfaces;
+using LandLeaser.Shared.DTOs;
 using LandLeaser.Shared.Models;
 
 namespace LandLeaser.APP.Services
@@ -18,11 +19,11 @@ namespace LandLeaser.APP.Services
         /// <param name="authToken">api endpoint</param>
         /// <param name="loginRequest"></param>
         /// <returns>New access token with its expiry and a refresh token</returns>
-        public async Task<LoginResult> Authenticate(LoginRequest loginRequest, string authToken = null)
+        public async Task<LoginResultDto> Authenticate(LoginRequest loginRequest, string authToken = null)
         {
 
             string endpoint = "api/Authentication/login";
-            var response = await _restService.PostItemAsync<LoginRequest,LoginResult>(authToken, loginRequest, endpoint);
+            var response = await _restService.PostItemAsync<LoginRequest,LoginResultDto>(authToken, loginRequest, endpoint);
             return response;
             
         }
