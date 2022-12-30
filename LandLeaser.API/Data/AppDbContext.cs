@@ -1,4 +1,5 @@
-﻿using LandLeaser.API.Data.Models;
+﻿using LandLeaser.API.Models;
+using LandLeaser.Shared.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
