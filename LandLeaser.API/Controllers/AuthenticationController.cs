@@ -1,5 +1,4 @@
 ﻿using LandLeaser.API.Data;
-using LandLeaser.API.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +8,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using LandLeaser.Shared.DTOs;
 using LandLeaser.Shared.Models;
+using LandLeaser.API.Models;
 
 namespace LandLeaser.API.Controllers
 {
@@ -91,8 +92,24 @@ namespace LandLeaser.API.Controllers
                 //Generate a token
                 var tokenValue = await GenerateJWTTokenAsync(userExists, null);
 
+                var result = new LoginResultDto()
+                {
+                    User = new User()
+                    {
+                        FullName = userExists.FirstName + userExists.LastName,
+                        Email = userExists.Email,
+                        PhoneNumber = userExists.PhoneNumber,
+                        Id = userExists.Id.ToString(),
+                    },
+                    LoginResult = new LoginResult()
+                    {
+                        ExpiresAt = tokenValue.ExpiresAt,
+                        RefreshToken = tokenValue.RefreshToken,
+                        Token = tokenValue.Token
+                    }
+                };
 
-                return Ok(tokenValue);
+                return Ok(result);
             }
             return Unauthorized();
         }

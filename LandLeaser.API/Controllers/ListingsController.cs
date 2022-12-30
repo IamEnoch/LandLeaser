@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LandLeaser.API.Data;
-using LandLeaser.API.Data.Models;
+using LandLeaser.Shared.DTOs;
 using Microsoft.AspNetCore.Authorization;
+using LandLeaser.API.Models;
 
 namespace LandLeaser.API.Controllers
 {
@@ -17,47 +14,44 @@ namespace LandLeaser.API.Controllers
     public class ListingsController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public ListingsController(AppDbContext context)
+        public ListingsController(AppDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Listings
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<IList<Listing>>> GetListings()
+        public async Task<ActionResult<IEnumerable<GetListingDto>>> GetListings()
         {
             if (_context.Listings == null)
             {
                 return NotFound();
             }
-
-            var query = _context.Listings
-                .Join(_context.Images, c => c.Id, v => v.ListingId, (c, v) => new { c, v });
-
-            var listings = new List<Listing>();
-            foreach (var VARIABLE in query)
-            {
-                var listing = new Listing()
-                {
-                    Id = VARIABLE.c.Id,
-                    Location = VARIABLE.c.Location,
-                    Size = VARIABLE.c.Size,
-                    Cost = VARIABLE.c.Cost,
-                    Duration = VARIABLE.c.Duration,
-                    Description = VARIABLE.c.Description,
-                    AppUserId = VARIABLE.c.AppUserId,
-                    Images = VARIABLE.c.Images,
-                    ApplicationUser = VARIABLE.c.ApplicationUser
-                };
-                listings.Add(listing);
-
-            }
-
-            return listings;
             
 
+            var listings = _context.Listings.GroupJoin(_context.Images,
+                x => x.Id, y => y.ListingId,
+                (listing, image) => new
+                {
+                    listing,
+                    image
+                }).SelectMany(x => x.image.DefaultIfEmpty(), (x, y) =>
+                new GetListingDto()
+                {
+                    AppUserId = x.listing.AppUserId,
+                    Cost = x.listing.Cost,
+                    Description = x.listing.Description,
+                    Duration = x.listing.Duration,
+                    Id = x.listing.Id.ToString(),
+                    Images = _mapper.Map<IList<ListingImageDto>>(x.listing.Images),
+                    Location = x.listing.Location,
+                    Size = x.listing.Size
+                });
+            return Ok(listings);
         }
 
 
@@ -120,12 +114,19 @@ namespace LandLeaser.API.Controllers
         // POST: api/Listings
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Listing>> PostListing(Listing listing)
+        public async Task<ActionResult<Listing>> PostListing([FromBody]CreateListingDto createListing)
         {
             if (_context.Listings == null)
             {
                 return Problem("Entity set 'AppDbContext.Listings'  is null.");
-            } 
+            }
+
+            var listing = new Listing(createListing.Location, createListing.Size, createListing.Cost,
+                createListing.Duration, createListing.Description, createListing.AppUserId)
+            {
+                Images = _mapper.Map<ICollection<ListingImage>>(createListing.Images)
+            };
+            
             _context.Listings.Add(listing);
             await _context.SaveChangesAsync();
 

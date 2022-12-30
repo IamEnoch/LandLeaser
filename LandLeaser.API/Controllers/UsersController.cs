@@ -1,6 +1,6 @@
 ﻿using LandLeaser.API.Data;
-using LandLeaser.API.Data.Models;
 using LandLeaser.API.Migrations;
+using LandLeaser.API.Models;
 using LandLeaser.Shared.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
