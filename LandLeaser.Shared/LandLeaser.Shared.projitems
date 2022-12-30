@@ -11,12 +11,14 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)DTOs\CreateListingDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTOs\GetListingDto.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\ListingImage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DTOs\LoginResultDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DTOs\ListingImageDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\LoginResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\LoginRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Register.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ResponseMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\TokenRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\UserBasicInfo.cs" />
   </ItemGroup>
 </Project>
