@@ -1,4 +1,4 @@
-﻿namespace LandLeaser.APP.Interfaces
+﻿namespace LandLeaser.App.Interfaces
 {
     public interface IRestService
     {

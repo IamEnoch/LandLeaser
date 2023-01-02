@@ -1,10 +1,10 @@
 ﻿using System.Net.Http.Headers;
-using LandLeaser.APP.Helpers;
-using LandLeaser.APP.Interfaces;
+using LandLeaser.App.Helpers;
+using LandLeaser.App.Interfaces;
 using LandLeaser.Shared.Models;
 using Newtonsoft.Json;
 
-namespace LandLeaser.APP.Services
+namespace LandLeaser.App.Services
 {
     public class UserService : IUserService
     {
@@ -46,7 +46,7 @@ namespace LandLeaser.APP.Services
 
                 //Set the new security sensitive preferences
                 await SecureStorage.SetAsync(nameof(App.Token), tokenRefreshResult.Token);
-                await SecureStorage.SetAsync(nameof(App.Token), tokenRefreshResult.RefreshToken);
+                await SecureStorage.SetAsync(nameof(App.RefreshToken), tokenRefreshResult.RefreshToken);
 
             }
 

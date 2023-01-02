@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace LandLeaser.APP.ViewModels
+namespace LandLeaser.App.ViewModels
 {
     public partial class BaseViewModel : ObservableObject
     {

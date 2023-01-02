@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace LandLeaser.APP
+namespace LandLeaser.App
 {
     public class Program
     {

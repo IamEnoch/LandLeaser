@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace LandLeaser.APP
+namespace LandLeaser.App
 {
     [Application]
     public class MainApplication : MauiApplication
@@ -10,6 +10,7 @@ namespace LandLeaser.APP
             : base(handle, ownership)
         {
         }
+
         protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
     }
 }

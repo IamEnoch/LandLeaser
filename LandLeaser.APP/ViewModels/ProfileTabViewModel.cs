@@ -1,8 +1,7 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using LandLeaser.APP.Views;
+﻿using CommunityToolkit.Mvvm.Input;
+using LandLeaser.App.Views;
 
-namespace LandLeaser.APP.ViewModels
+namespace LandLeaser.App.ViewModels
 {
     public partial class ProfileTabViewModel : BaseViewModel
     {

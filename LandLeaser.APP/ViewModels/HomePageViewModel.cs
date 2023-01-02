@@ -1,11 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
 using CommunityToolkit.Mvvm.Input;
-using LandLeaser.APP.Interfaces;
-using LandLeaser.APP.Views;
+using LandLeaser.App.Interfaces;
+using LandLeaser.App.Views;
 using LandLeaser.Shared.DTOs;
 
-namespace LandLeaser.APP.ViewModels
+namespace LandLeaser.App.ViewModels
 {
     public partial class HomePageViewModel : BaseViewModel
     {

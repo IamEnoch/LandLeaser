@@ -1,13 +1,11 @@
-﻿using LandLeaser.APP.ViewModels;
-using LandLeaser.APP.Views;
-using System;
-using System.Threading.Tasks;
+﻿using LandLeaser.App.ViewModels;
+using LandLeaser.App.Views;
 
-namespace LandLeaser.APP
+namespace LandLeaser.App
 {
     public partial class AppShell : Shell
     {
-        public readonly AppShellViewModel _appShellViewModel;
+        private readonly AppShellViewModel _appShellViewModel;
 
         public AppShell(AppShellViewModel appShellViewModel)
         {
@@ -17,12 +15,13 @@ namespace LandLeaser.APP
             BindingContext = _appShellViewModel;
 
             //Explicit route registration
+            Routing.RegisterRoute(nameof(AddImagesPage), typeof(AddImagesPage));
             Routing.RegisterRoute(nameof(AddListingPage), typeof(AddListingPage));
             Routing.RegisterRoute(nameof(LogoutPage), typeof(LogoutPage));
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
             Routing.RegisterRoute(nameof(SignUpPage), typeof(SignUpPage));
             Routing.RegisterRoute(nameof(AddListingPage), typeof(AddListingPage));
-            
+
         }
         protected override async void OnAppearing()
         {

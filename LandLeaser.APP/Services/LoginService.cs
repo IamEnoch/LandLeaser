@@ -1,8 +1,8 @@
-﻿using LandLeaser.APP.Interfaces;
+﻿using LandLeaser.App.Interfaces;
 using LandLeaser.Shared.DTOs;
 using LandLeaser.Shared.Models;
 
-namespace LandLeaser.APP.Services
+namespace LandLeaser.App.Services
 {
     public class LoginService : ILoginService
     {
@@ -11,6 +11,7 @@ namespace LandLeaser.APP.Services
         {
             _restService = restService;
         }
+        
         public string BaseUrl { get; set; }
 
         /// <summary>

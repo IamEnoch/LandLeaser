@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LandLeaser.APP.Views.HomePage"
+             x:Class="LandLeaser.App.Views.HomePage"
              xmlns:dtOs="clr-namespace:LandLeaser.Shared.DTOs"
-             xmlns:viewModels="clr-namespace:LandLeaser.APP.ViewModels"
+             xmlns:viewModels="clr-namespace:LandLeaser.App.ViewModels"
              x:DataType="viewModels:HomePageViewModel"
              Shell.NavBarIsVisible="False"
              Title="{Binding Title}">

@@ -1,7 +1,7 @@
 ﻿using LandLeaser.Shared.DTOs;
 using LandLeaser.Shared.Models;
 
-namespace LandLeaser.APP.Interfaces
+namespace LandLeaser.App.Interfaces
 {
     public interface ILoginService
     {

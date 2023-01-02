@@ -2,14 +2,14 @@
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
-using LandLeaser.APP.Interfaces;
+using LandLeaser.App.Interfaces;
 using Newtonsoft.Json;
 
-namespace LandLeaser.APP.Services
+namespace LandLeaser.App.Services
 {
     public class RestService : IRestService
     {
-        private HttpClient _httpClient;
+        private readonly HttpClient _httpClient;
 
         public RestService()
         {
@@ -58,7 +58,7 @@ namespace LandLeaser.APP.Services
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
             
-            T item = default(T);
+            var item = default(T);
 
             try
             {

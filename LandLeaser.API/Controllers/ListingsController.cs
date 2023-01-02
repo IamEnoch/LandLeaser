@@ -130,7 +130,9 @@ namespace LandLeaser.API.Controllers
             _context.Listings.Add(listing);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetListing", new { id = listing.Id }, listing);
+            var responseListing = _mapper.Map<GetListingDto>(listing);
+
+            return CreatedAtAction("GetListing", new { id = responseListing.Id }, responseListing);
         }
 
         // DELETE: api/Listings/14ab1492-f6f0-434a-8090-9e81ad1d2c99

@@ -4,12 +4,15 @@ using LandLeaser.Shared.DTOs;
 
 namespace LandLeaser.API.Mapping
 {
-    public class ListingImageProfile : Profile
+    public class ListingProfile : Profile
     {
-        public ListingImageProfile()
+        public ListingProfile()
         {
             CreateMap<ListingImage, ListingImageDto>();
             CreateMap<ListingImageDto, ListingImage>();
+
+            CreateMap<Listing, GetListingDto>();
+            CreateMap<GetListingDto, Listing>();
         }
     }
 }

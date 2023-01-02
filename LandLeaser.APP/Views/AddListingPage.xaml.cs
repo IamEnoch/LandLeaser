@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LandLeaser.APP.ViewModels;
+﻿using LandLeaser.App.ViewModels;
 
-namespace LandLeaser.APP.Views;
+namespace LandLeaser.App.Views;
 
 public partial class AddListingPage : ContentPage
 {
@@ -15,9 +10,4 @@ public partial class AddListingPage : ContentPage
         InitializeComponent();
     }
 
-    protected override bool OnBackButtonPressed()
-    {
-        Shell.Current.GoToAsync("..");
-        return base.OnBackButtonPressed();
-    }
 }

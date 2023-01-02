@@ -1,47 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="LandLeaser.APP.AppShell"
+    x:Class="LandLeaser.App.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:viewModels="clr-namespace:LandLeaser.APP.ViewModels"
-    xmlns:views="clr-namespace:LandLeaser.APP.Views"
+    xmlns:views="clr-namespace:LandLeaser.App.Views"
+    xmlns:viewModels="clr-namespace:LandLeaser.App.ViewModels"
     x:DataType="viewModels:AppShellViewModel"
     FlyoutBehavior="Disabled">
 
     <TabBar
-        IsVisible="{Binding IsBusy}">
+        Route="tabBar">
         <Tab
+            Route="explore"
             Title="Explore"
             Icon="explore.png">
             <ShellContent 
+                Route="homePage"
                 ContentTemplate="{DataTemplate views:HomePage}"/>
         </Tab>
         <Tab
+            Route="wishlist"
             Title="Wish list"
             Icon="wishlist.png">
             <ShellContent
+                Route="wishlistPage"
                 ContentTemplate="{DataTemplate views:HomePage}"/>
         </Tab>
         <Tab
+            Route="leases"
             Title="Leases"
             Icon="leases.png">
-            <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
+            <ShellContent 
+                Route="leasesPage"
+                ContentTemplate="{DataTemplate views:HomePage}"/>
         </Tab>
         <Tab
+            Route="messages"
             Title="Messages"
             Icon="chat.png">
-            <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
+            <ShellContent
+                Route="messagesPage"
+                ContentTemplate="{DataTemplate views:HomePage}"/>
 
         </Tab>
         <Tab
+            Route="profile"
             Title="{Binding Title, Mode=OneWay}"
             Icon="profile.png">
             <ShellContent 
+                Route="profileTabLogin"
                 IsVisible="{Binding IsNotLoggedIn}"
                 ContentTemplate="{DataTemplate views:ProfileTabLogin}"/>
             <ShellContent 
+                Route="profileTabLoggedIn"
                 IsVisible="{Binding IsLoggedIn}"
                 ContentTemplate="{DataTemplate views:ProfileTabLoggedIn}"/>
         </Tab>
     </TabBar>
+
 </Shell>

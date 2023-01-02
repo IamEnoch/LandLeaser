@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.32804.182
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LandLeaser.APP", "LandLeaser.APP\LandLeaser.APP.csproj", "{E229E615-E709-4E44-9210-47810CF4A5AD}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LandLeaser.API", "LandLeaser.API\LandLeaser.API.csproj", "{C94978DE-1DF1-4E0C-81E9-B50C5AEB365A}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "LandLeaser.Shared", "LandLeaser.Shared\LandLeaser.Shared.shproj", "{D2C54324-24D5-4A14-BD68-2EF8522281F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LandLeaser.App", "LandLeaser.App\LandLeaser.App.csproj", "{EFD98948-D01D-4B97-AF8C-53C508F4F498}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,18 +17,6 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E229E615-E709-4E44-9210-47810CF4A5AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E229E615-E709-4E44-9210-47810CF4A5AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E229E615-E709-4E44-9210-47810CF4A5AD}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{E229E615-E709-4E44-9210-47810CF4A5AD}.Debug|x64.ActiveCfg = Debug|x64
-		{E229E615-E709-4E44-9210-47810CF4A5AD}.Debug|x64.Build.0 = Debug|x64
-		{E229E615-E709-4E44-9210-47810CF4A5AD}.Debug|x64.Deploy.0 = Debug|x64
-		{E229E615-E709-4E44-9210-47810CF4A5AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E229E615-E709-4E44-9210-47810CF4A5AD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E229E615-E709-4E44-9210-47810CF4A5AD}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{E229E615-E709-4E44-9210-47810CF4A5AD}.Release|x64.ActiveCfg = Release|Any CPU
-		{E229E615-E709-4E44-9210-47810CF4A5AD}.Release|x64.Build.0 = Release|Any CPU
-		{E229E615-E709-4E44-9210-47810CF4A5AD}.Release|x64.Deploy.0 = Release|Any CPU
 		{C94978DE-1DF1-4E0C-81E9-B50C5AEB365A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C94978DE-1DF1-4E0C-81E9-B50C5AEB365A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C94978DE-1DF1-4E0C-81E9-B50C5AEB365A}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -37,6 +25,18 @@ Global
 		{C94978DE-1DF1-4E0C-81E9-B50C5AEB365A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C94978DE-1DF1-4E0C-81E9-B50C5AEB365A}.Release|x64.ActiveCfg = Release|x64
 		{C94978DE-1DF1-4E0C-81E9-B50C5AEB365A}.Release|x64.Build.0 = Release|x64
+		{EFD98948-D01D-4B97-AF8C-53C508F4F498}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFD98948-D01D-4B97-AF8C-53C508F4F498}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFD98948-D01D-4B97-AF8C-53C508F4F498}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{EFD98948-D01D-4B97-AF8C-53C508F4F498}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EFD98948-D01D-4B97-AF8C-53C508F4F498}.Debug|x64.Build.0 = Debug|Any CPU
+		{EFD98948-D01D-4B97-AF8C-53C508F4F498}.Debug|x64.Deploy.0 = Debug|Any CPU
+		{EFD98948-D01D-4B97-AF8C-53C508F4F498}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFD98948-D01D-4B97-AF8C-53C508F4F498}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFD98948-D01D-4B97-AF8C-53C508F4F498}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{EFD98948-D01D-4B97-AF8C-53C508F4F498}.Release|x64.ActiveCfg = Release|Any CPU
+		{EFD98948-D01D-4B97-AF8C-53C508F4F498}.Release|x64.Build.0 = Release|Any CPU
+		{EFD98948-D01D-4B97-AF8C-53C508F4F498}.Release|x64.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -47,6 +47,6 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		LandLeaser.Shared\LandLeaser.Shared.projitems*{c94978de-1df1-4e0c-81e9-b50c5aeb365a}*SharedItemsImports = 5
 		LandLeaser.Shared\LandLeaser.Shared.projitems*{d2c54324-24d5-4a14-bd68-2ef8522281f6}*SharedItemsImports = 13
-		LandLeaser.Shared\LandLeaser.Shared.projitems*{e229e615-e709-4e44-9210-47810cf4a5ad}*SharedItemsImports = 5
+		LandLeaser.Shared\LandLeaser.Shared.projitems*{efd98948-d01d-4b97-af8c-53c508f4f498}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

@@ -1,6 +1,6 @@
-using LandLeaser.APP.ViewModels;
+using LandLeaser.App.ViewModels;
 
-namespace LandLeaser.APP.Views;
+namespace LandLeaser.App.Views;
 
 public partial class ProfileTabLoggedIn : ContentPage
 {

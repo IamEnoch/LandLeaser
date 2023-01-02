@@ -1,9 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using LandLeaser.APP.Interfaces;
+using LandLeaser.App.Interfaces;
+using LandLeaser.App.Views;
 using LandLeaser.Shared.DTOs;
 
-namespace LandLeaser.APP.ViewModels
+namespace LandLeaser.App.ViewModels
 {
     public partial class AddListingViewModel : BaseViewModel
     {
@@ -45,6 +46,12 @@ namespace LandLeaser.APP.ViewModels
         }
 
         [RelayCommand]
+        async Task GoToAddImagesAsync()
+        {
+            await Shell.Current.GoToAsync(nameof(AddImagesPage));   
+        }
+
+        [RelayCommand]
         async Task SubmitListing()
         {
             //Check if all section have been filled
@@ -55,10 +62,12 @@ namespace LandLeaser.APP.ViewModels
                 && !String.IsNullOrEmpty(Description)
                 && !String.IsNullOrEmpty(PreferredCrop))
             {
-                _isValid = true;
+                IsValid = true;
 
                 var authToken = await SecureStorage.GetAsync(nameof(App.Token));
                 var userId = await SecureStorage.GetAsync("userId");
+                IList<ListingImageDto> item = new List<ListingImageDto>();
+
                 var listing = new CreateListingDto()
                 {
                     AppUserId = Guid.Parse(userId),
@@ -66,7 +75,7 @@ namespace LandLeaser.APP.ViewModels
                     Description = Description,
                     Duration = LeaseDuration,
                     Location = LandLocation,
-                   
+                    Images = item,
                     Size = LandSize
                 };
 

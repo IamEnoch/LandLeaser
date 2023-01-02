@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LandLeaser.APP.Views.ProfileTabLoggedIn"
-             xmlns:viewModels="clr-namespace:LandLeaser.APP.ViewModels"
+             xmlns:viewModels="clr-namespace:LandLeaser.App.ViewModels"
+             x:Class="LandLeaser.App.Views.ProfileTabLoggedIn"
              x:DataType="viewModels:AppShellViewModel"
              Title="ProfileTabLoggedIn">
     <Grid>

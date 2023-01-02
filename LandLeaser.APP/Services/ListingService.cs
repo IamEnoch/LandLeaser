@@ -1,14 +1,19 @@
-﻿using LandLeaser.APP.Interfaces;
+﻿using LandLeaser.App.Helpers;
+using LandLeaser.App.Interfaces;
 using LandLeaser.Shared.DTOs;
+using LandLeaser.Shared.Models;
 
-namespace LandLeaser.APP.Services
+namespace LandLeaser.App.Services
 {
     public class ListingService : IListingService
     {
         private readonly IRestService _restService;
-        public ListingService(IRestService restService)
+        private readonly ILoginService _loginService;
+        public TokenValidateHelper TokenValidater = new TokenValidateHelper();
+        public ListingService(IRestService restService, ILoginService loginService)
         {
             _restService = restService;
+            _loginService = loginService;
         }
         
         /// <summary>
@@ -19,7 +24,9 @@ namespace LandLeaser.APP.Services
         public async Task<List<GetListingDto>> GetListingsAsync(string authToken)
         {
             string endpoint = "api/Listings";
-            
+
+            authToken = await RefreshToken(authToken);
+
             var response = await _restService.GetItemsAsync<GetListingDto>(authToken, endpoint);
 
             return response;
@@ -34,6 +41,8 @@ namespace LandLeaser.APP.Services
         public async Task<GetListingDto> GetListingAsync(string authToken, string id)
         {
             string endpoint = $"api/listings/{id}";
+
+            authToken = await RefreshToken(authToken);
 
             var response = await _restService.GetItemAsync<GetListingDto>(authToken, id, endpoint);
 
@@ -50,10 +59,39 @@ namespace LandLeaser.APP.Services
         {
             string endpoint = "api/listings";
 
+            authToken = await RefreshToken(authToken);
+
             var response =
                 await _restService.PostItemAsync<CreateListingDto, GetListingDto>(authToken, createListing, endpoint);
 
             return response;
+        }
+
+        public async Task<string> RefreshToken(string accessToken)
+        {
+            //Validate the token
+            var validToken = await TokenValidater.ValidateToken(accessToken);
+
+            //Refresh token
+            if (validToken != true)
+            {
+                var tokenRequest = new TokenRequest()
+                {
+                    Token = accessToken,
+                    //RefreshToken = Preferences.Get(nameof(App.RefreshToken), "");
+                    RefreshToken = await SecureStorage.GetAsync(nameof(App.RefreshToken))
+                };
+
+                var tokenRefreshResult = await _loginService.RefreshToken(tokenRequest);
+                accessToken = tokenRefreshResult.Token;
+
+                //Set the new security sensitive preferences
+                await SecureStorage.SetAsync(nameof(App.Token), tokenRefreshResult.Token);
+                await SecureStorage.SetAsync(nameof(App.RefreshToken), tokenRefreshResult.RefreshToken);
+
+                
+            }
+            return accessToken;
         }
     }
 }

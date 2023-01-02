@@ -1,6 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 
-namespace LandLeaser.APP.Helpers
+namespace LandLeaser.App.Helpers
 {
     public class TokenValidateHelper
     {

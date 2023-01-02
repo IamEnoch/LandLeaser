@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace LandLeaser.APP
+namespace LandLeaser.App
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate
