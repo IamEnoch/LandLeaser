@@ -25,7 +25,7 @@ namespace LandLeaser.API.Controllers
         // GET: api/Listings
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<GetListingDto>>> GetListings()
+        private async Task<ActionResult<IEnumerable<GetListingDto>>> GetListings()
         {
             if (_context.Listings == null)
             {
@@ -47,7 +47,7 @@ namespace LandLeaser.API.Controllers
                     Description = x.listing.Description,
                     Duration = x.listing.Duration,
                     Id = x.listing.Id.ToString(),
-                    Images = _mapper.Map<IList<ListingImageDto>>(x.listing.Images),
+                    Images = _mapper.Map<IList<ListingImageDto>>(x.image),
                     Location = x.listing.Location,
                     Size = x.listing.Size
                 });

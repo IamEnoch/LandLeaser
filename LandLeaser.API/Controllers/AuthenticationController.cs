@@ -1,9 +1,7 @@
 ﻿using LandLeaser.API.Data;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -141,15 +139,15 @@ namespace LandLeaser.API.Controllers
             //Create an instance of the token handler
             var jwtTokenHandler = new JwtSecurityTokenHandler();
 
-            //Retirving the refresh token details
+            //Retrieving the refresh token details
             var storedToken = await _context.RefreshTokens.FirstOrDefaultAsync(x => x.Token == tokenRequest.RefreshToken);
 
-            //Geting the user associated with the refresh token
+            //Getting the user associated with the refresh token
             var dbUser = await _userManager.FindByIdAsync(storedToken.UserId.ToString());
 
             try
             {
-                //Validted the access token
+                //Validated the access token
                 var tokenCheckResult = jwtTokenHandler.ValidateToken(tokenRequest.Token, _tokenValidationParameters,
                     out var validatedToken);
 
@@ -190,7 +188,7 @@ namespace LandLeaser.API.Controllers
             var token = new JwtSecurityToken(
                 issuer: _configuration["JWT:Issuer"],
                 audience: _configuration["JWT:Audience"],
-                expires: DateTime.UtcNow.AddMinutes(1),
+                expires: DateTime.UtcNow.AddMinutes(5),
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256));
 
