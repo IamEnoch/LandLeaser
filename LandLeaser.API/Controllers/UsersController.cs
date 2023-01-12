@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LandLeaser.API.Controllers
 {
-    [Route("api/check/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
